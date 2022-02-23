@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<head>
+    <title>JSF Training</title>
+</head>
+
+
+<h:form>
+	<h:panelGrid columns="2">
+		<h:outputText value="Id"/>
+		<h:inputText value="" />
+		<h:outputText value="Code"/>
+		<h:inputText value="" />
+		<h:outputText value="Name"/>
+		<h:inputText value="" />
+		<h:outputText value="City"/>
+		<h:inputText value="" />
+		
+		BOTON ADD
+	</h:panelGrid>
+    <h:dataTable value="#{teamsBean.teamsList}" var="team">
+    	<h:column>
+    		<h:outputText value="#{team.id}"/>
+    	</h:column>
+    	<h:column>
+    		<h:outputText value="#{team.code}"/>
+    	</h:column>
+    	<h:column>
+    		<h:outputText value="#{team.name}"/>
+    	</h:column>
+    	<h:column>
+    		<h:outputText value="#{team.city}"/>
+    	</h:column>
+    	<h:column>
+    		<h:commandLink value="method param" action="#{teamsBean.goToDetail(team.id)}">
+				<f:setPropertyActionListener value="extremo" target="#{teamsBean.position}" />    		
+    		</h:commandLink>
+    	</h:column>
+    	
+
+    </h:dataTable>
+
+</h:form>
+
+</html>

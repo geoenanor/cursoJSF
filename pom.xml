@@ -13,6 +13,7 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/x
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.target>1.8</maven.compiler.target>
         <maven.compiler.source>1.8</maven.compiler.source>
+        <javax.faces.api>2.3</javax.faces.api>
     </properties>
   
   <dependencies>
@@ -29,7 +30,7 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/x
 		<dependency>
 		    <groupId>javax.faces</groupId>
 		    <artifactId>javax.faces-api</artifactId>
-		    <version>2.3</version>
+		    <version>${javax.faces.api}</version>
 		</dependency>
 
 
