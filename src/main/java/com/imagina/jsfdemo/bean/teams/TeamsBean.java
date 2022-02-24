@@ -24,6 +24,7 @@ public class TeamsBean implements Serializable {
 	
 	private String nameSearch;
 	
+	private static int order;
 	@PostConstruct
 	public void initBean() {
 		loadTeamsList();
@@ -32,10 +33,12 @@ public class TeamsBean implements Serializable {
 	
 	private void initVariables() {
 		newTeam = new TeamDTO();
+		order = -1;
 	}
 	
 	public void sortTeamsByName() {
-		TeamComparatorbyName comp = new TeamComparatorbyName();
+		order *= -1;
+		TeamComparatorbyName comp = new TeamComparatorbyName((order>0));
 		teamsList.sort(comp);
 	}
 	
