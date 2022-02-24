@@ -1,7 +1,10 @@
 package com.imagina.jsfdemo.bean.teams;
 
+import java.io.Serializable;
+
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
 
@@ -10,6 +13,7 @@ import com.imagina.jsfdemo.bean.dto.TeamDTO;
 @Named
 @RequestScoped
 public class TeamDetailBean {
+	
 	
 	private String id;
 	

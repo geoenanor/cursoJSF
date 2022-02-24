@@ -1,5 +1,6 @@
 package com.imagina.jsfdemo.bean.teams;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,14 +8,17 @@ import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.component.html.HtmlDataTable;
 import javax.faces.context.FacesContext;
+import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
 import com.imagina.jsfdemo.bean.dto.TeamDTO;
 
 @Named
-@RequestScoped
-public class TeamsBean {
-	
+@ViewScoped
+public class TeamsBean implements Serializable {
+
+	private static final long serialVersionUID = 9149473815682239832L;
+
 	private List<TeamDTO> teamsList;
 	
 	private TeamDTO newTeam;
