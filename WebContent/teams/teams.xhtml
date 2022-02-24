@@ -35,18 +35,26 @@
     
     <h:dataTable value="#{teamsBean.teamsList}" var="team">
     	<h:column>
+    		<f:facet name="header">Id</f:facet>
     		<h:outputText value="#{team.id}"/>
     	</h:column>
     	<h:column>
+    		<f:facet name="header">Code</f:facet>
     		<h:outputText value="#{team.code}"/>
     	</h:column>
     	<h:column>
+    		<f:facet name="header">
+    			<h:commandLink actionListener="#{teamsBean.sortTeamsByName}"
+    			 value="Name" immediate="true"/>
+    		</f:facet>
     		<h:outputText value="#{team.name}"/>
     	</h:column>
     	<h:column>
+    		<f:facet name="header">City</f:facet>
     		<h:outputText value="#{team.city}"/>
     	</h:column>
     	<h:column>
+    		<f:facet name="header">Coach</f:facet>
     		<h:outputText value="#{team.coach}"/>
     	</h:column>
     	<h:column>

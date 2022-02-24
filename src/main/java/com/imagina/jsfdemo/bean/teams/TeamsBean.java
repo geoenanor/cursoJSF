@@ -2,12 +2,14 @@ package com.imagina.jsfdemo.bean.teams;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
+import com.imagina.jsfdemo.bean.dto.TeamComparatorbyName;
 import com.imagina.jsfdemo.bean.dto.TeamDTO;
 
 @Named
@@ -30,6 +32,11 @@ public class TeamsBean implements Serializable {
 	
 	private void initVariables() {
 		newTeam = new TeamDTO();
+	}
+	
+	public void sortTeamsByName() {
+		TeamComparatorbyName comp = new TeamComparatorbyName();
+		teamsList.sort(comp);
 	}
 	
 	
