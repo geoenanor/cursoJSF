@@ -11,6 +11,7 @@ public class TeamDTO implements Serializable{
 	private String code;
 	private String name;
 	private String city;
+	private String coach;
 	
 	public String isBarcelona() {
 		return this.city.equals("BCN") ? "Yes":"no";
@@ -39,6 +40,14 @@ public class TeamDTO implements Serializable{
 	}
 	public void setCity(String city) {
 		this.city = city;
+	}
+
+	public String getCoach() {
+		return coach;
+	}
+
+	public void setCoach(String coach) {
+		this.coach = coach;
 	}
 	
 	

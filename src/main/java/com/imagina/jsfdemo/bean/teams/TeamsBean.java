@@ -17,27 +17,27 @@ public class TeamsBean {
 	
 	private List<TeamDTO> teamsList;
 	
+	private TeamDTO newTeam;
+	
 	private String nameSearch;
 
-	private Integer id;
-	private String code;
-	private String name;
-	private String city;
-
-	
-	public void addTeam() {
-		TeamDTO team = new TeamDTO();
-		team.setId(id);
-		team.setCode(code);
-		team.setName(name);
-		team.setCity(city);
-		teamsList.add(team);
-	}
 	
 	@PostConstruct
 	public void initBean() {
 		loadTeamsList();
+		initVariables();
 	}
+	
+	private void initVariables() {
+		newTeam = new TeamDTO();
+	}
+	
+	public void addTeam() {
+		newTeam.setId(teamsList.size()+1);
+		teamsList.add(newTeam);
+		newTeam = new TeamDTO();
+	}
+	
 	
 	public String goToDetail(String id) {
 		return "teamDetail?faces-redirect=true&teamId="+id;
@@ -47,24 +47,27 @@ public class TeamsBean {
 		teamsList = new ArrayList<TeamDTO>();
 		
 		TeamDTO team = new TeamDTO();
-		team.setId(1);
+		team.setId(teamsList.size()+1);
 		team.setCode("FCB");
 		team.setName("Futbol Club Barcelona");
 		team.setCity("BCN");
+		team.setCoach("Xavi");
 		teamsList.add(team);
 		
 		team = new TeamDTO();
-		team.setId(2);
+		team.setId(teamsList.size()+1);
 		team.setCode("RM");
 		team.setName("Real Madrid");
 		team.setCity("Madrid");
+		team.setCoach("Ancelotti");
 		teamsList.add(team);
 		
 		team = new TeamDTO();
-		team.setId(3);
+		team.setId(teamsList.size()+1);
 		team.setCode("AM");
 		team.setName("Atletico de Madrid");
 		team.setCity("Madrid");
+		team.setCoach("Cholo");
 		teamsList.add(team);
 
 		
@@ -86,37 +89,14 @@ public class TeamsBean {
 		this.nameSearch = nameSearch;
 	}
 
-	public Integer getId() {
-		return id;
+	public TeamDTO getNewTeam() {
+		return newTeam;
 	}
 
-	public void setId(Integer id) {
-		this.id = id;
+	public void setNewTeam(TeamDTO newTeam) {
+		this.newTeam = newTeam;
 	}
 
-	public String getCode() {
-		return code;
-	}
-
-	public void setCode(String code) {
-		this.code = code;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getCity() {
-		return city;
-	}
-
-	public void setCity(String city) {
-		this.city = city;
-	}
 
 	
 	

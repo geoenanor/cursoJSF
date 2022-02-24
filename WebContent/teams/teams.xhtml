@@ -13,14 +13,14 @@
 
 <h:form>
 	<h:panelGrid columns="2">
-		<h:outputText value="Id"/>
-		<h:inputText value="#{teamsBean.id}" />
 		<h:outputText value="Code"/>
-		<h:inputText value="#{teamsBean.code}" />
+		<h:inputText value="#{teamsBean.newTeam.code}" required="true"/>
 		<h:outputText value="Name"/>
-		<h:inputText value="#{teamsBean.name}" />
+		<h:inputText value="#{teamsBean.newTeam.name}" required="true"/>
 		<h:outputText value="City"/>
-		<h:inputText value="#{teamsBean.city}" />
+		<h:inputText value="#{teamsBean.newTeam.city}" required="true"/>
+		<h:outputText value="Coach"/>
+		<h:inputText value="#{teamsBean.newTeam.coach}" />
 		
 		<h:commandButton actionListener="#{teamsBean.addTeam}" value="Add"/>				
 	</h:panelGrid>
@@ -37,6 +37,9 @@
     	</h:column>
     	<h:column>
     		<h:outputText value="#{team.city}"/>
+    	</h:column>
+    	<h:column>
+    		<h:outputText value="#{team.coach}"/>
     	</h:column>
     	<h:column>
     		<h:commandLink value="method param" action="#{teamsBean.goToDetail(team.id)}">
