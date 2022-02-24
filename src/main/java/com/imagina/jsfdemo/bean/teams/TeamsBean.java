@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
+import javax.faces.component.html.HtmlDataTable;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
 
@@ -17,13 +18,20 @@ public class TeamsBean {
 	private List<TeamDTO> teamsList;
 	
 	private String nameSearch;
+
+	private Integer id;
+	private String code;
+	private String name;
+	private String city;
+
 	
-	private String player;
-	
-	private String position;
-	
-	public String saludar() {
-		return "hola";
+	public void addTeam() {
+		TeamDTO team = new TeamDTO();
+		team.setId(id);
+		team.setCode(code);
+		team.setName(name);
+		team.setCity(city);
+		teamsList.add(team);
 	}
 	
 	@PostConstruct
@@ -32,7 +40,7 @@ public class TeamsBean {
 	}
 	
 	public String goToDetail(String id) {
-		return "teamDetail?faces-redirect=true&teamId="+id + "&position="+position;
+		return "teamDetail?faces-redirect=true&teamId="+id;
 	}
 	
 	private void loadTeamsList() {
@@ -78,20 +86,36 @@ public class TeamsBean {
 		this.nameSearch = nameSearch;
 	}
 
-	public String getPlayer() {
-		return player;
+	public Integer getId() {
+		return id;
 	}
 
-	public void setPlayer(String player) {
-		this.player = player;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
-	public String getPosition() {
-		return position;
+	public String getCode() {
+		return code;
 	}
 
-	public void setPosition(String position) {
-		this.position = position;
+	public void setCode(String code) {
+		this.code = code;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
 	}
 
 	

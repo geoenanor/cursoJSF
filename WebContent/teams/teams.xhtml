@@ -14,16 +14,17 @@
 <h:form>
 	<h:panelGrid columns="2">
 		<h:outputText value="Id"/>
-		<h:inputText value="" />
+		<h:inputText value="#{teamsBean.id}" />
 		<h:outputText value="Code"/>
-		<h:inputText value="" />
+		<h:inputText value="#{teamsBean.code}" />
 		<h:outputText value="Name"/>
-		<h:inputText value="" />
+		<h:inputText value="#{teamsBean.name}" />
 		<h:outputText value="City"/>
-		<h:inputText value="" />
+		<h:inputText value="#{teamsBean.city}" />
 		
-		<h:commandButton />
+		<h:commandButton actionListener="#{teamsBean.addTeam}" value="Add"/>				
 	</h:panelGrid>
+    
     <h:dataTable value="#{teamsBean.teamsList}" var="team">
     	<h:column>
     		<h:outputText value="#{team.id}"/>
