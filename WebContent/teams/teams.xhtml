@@ -21,11 +21,14 @@
 		<h:outputText value="Name"/>
 		<h:inputText value="#{teamsBean.newTeam.name}" />
 		<h:outputText value="City"/>
-		<h:inputText value="#{teamsBean.newTeam.city}" />
+		<h:selectOneMenu value="#{teamsBean.newTeam.city}">
+			<f:selectItems value="#{teamsBean.cityList}" />
+		</h:selectOneMenu>
 		<h:outputText value="Coach"/>
 		<h:inputText value="#{teamsBean.newTeam.coach}" />
 		
-		<h:commandButton actionListener="#{teamsBean.addTeam}" value="Add"/>				
+		<h:commandButton actionListener="#{teamsBean.addTeam}" value="Add">
+		</h:commandButton>				
 	</h:panelGrid>
     
     <h:dataTable value="#{teamsBean.teamsList}" var="team">

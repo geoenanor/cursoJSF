@@ -14,7 +14,8 @@ import com.imagina.jsfdemo.bean.dto.TeamDTO;
 @RequestScoped
 public class TeamDetailBean {
 	
-	
+
+
 	private String id;
 	
 	private TeamDTO teamDTO;
