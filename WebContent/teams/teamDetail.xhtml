@@ -19,6 +19,11 @@
 		<h:outputText value="#{teamDetailBean.teamDTO.code}"/>
 		<h:outputText value="Name"/>
 		<h:outputText value="#{teamDetailBean.teamDTO.name}"/>
+		<h:outputText value="City"/>
+		<h:selectOneMenu value="#{teamDetailBean.teamDTO.city}">
+			<f:selectItem itemLabel="None" itemValue="#{null}"/>
+			<f:selectItems value="#{dropdownsBean.cityList}" />
+		</h:selectOneMenu>
 	</h:panelGrid>
 
 </h:form>

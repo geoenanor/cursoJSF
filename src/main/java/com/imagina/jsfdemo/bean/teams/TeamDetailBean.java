@@ -1,10 +1,7 @@
 package com.imagina.jsfdemo.bean.teams;
 
-import java.io.Serializable;
-
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
-import javax.enterprise.context.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
 
@@ -34,7 +31,7 @@ public class TeamDetailBean {
 		teamDTO.setId(id);
 		teamDTO.setCode("FCB");
 		teamDTO.setName("Futbol Club Barcelona");
-		teamDTO.setCity("BCN");
+		teamDTO.setCity("Barcelona");
 	}
 
 	public TeamDTO getTeamDTO() {

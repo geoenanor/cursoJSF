@@ -5,10 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
-import javax.enterprise.context.RequestScoped;
-import javax.faces.component.html.HtmlDataTable;
-import javax.faces.context.FacesContext;
-import javax.faces.model.SelectItem;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
@@ -26,26 +22,19 @@ public class TeamsBean implements Serializable {
 	
 	private String nameSearch;
 	
-	private List<SelectItem> cityList;
 
 	
 	@PostConstruct
 	public void initBean() {
 		loadTeamsList();
 		initVariables();
-		initDropdowns();
 	}
 	
 	private void initVariables() {
 		newTeam = new TeamDTO();
 	}
 	
-	private void initDropdowns() {
-		cityList = new ArrayList<SelectItem>();
-		cityList.add(new SelectItem("Barcelona", "Barcelona"));
-		cityList.add(new SelectItem("Madrid", "Madrid"));
-		cityList.add(new SelectItem("Sev", "Sevilla"));
-	}
+	
 	
 	public void addTeam() {
 		newTeam.setId(teamsList.size()+1);
@@ -111,17 +100,6 @@ public class TeamsBean implements Serializable {
 	public void setNewTeam(TeamDTO newTeam) {
 		this.newTeam = newTeam;
 	}
-
-	public List<SelectItem> getCityList() {
-		return cityList;
-	}
-
-	public void setCityList(List<SelectItem> cityList) {
-		this.cityList = cityList;
-	}
-
-
-	
-	
+		
 
 }
