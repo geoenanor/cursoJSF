@@ -22,8 +22,6 @@ public class TeamsBean implements Serializable {
 	
 	private String nameSearch;
 	
-
-	
 	@PostConstruct
 	public void initBean() {
 		loadTeamsList();
@@ -100,6 +98,6 @@ public class TeamsBean implements Serializable {
 	public void setNewTeam(TeamDTO newTeam) {
 		this.newTeam = newTeam;
 	}
-		
+
 
 }

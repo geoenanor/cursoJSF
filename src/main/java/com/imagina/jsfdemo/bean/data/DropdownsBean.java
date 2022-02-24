@@ -9,6 +9,8 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.faces.model.SelectItem;
 import javax.inject.Named;
 
+import com.imagina.jsfdemo.bean.dto.CityDTO;
+
 @Named
 @ApplicationScoped
 public class DropdownsBean implements Serializable {
@@ -16,7 +18,7 @@ public class DropdownsBean implements Serializable {
 
 	private static final long serialVersionUID = 2767894226114205195L;
 	
-	private List<SelectItem> cityList;
+	private List<CityDTO> cityList;
 	
 	@PostConstruct
 	public void initBean() {
@@ -24,13 +26,13 @@ public class DropdownsBean implements Serializable {
 	}
 	
 	private void initDropdowns() {
-		cityList = new ArrayList<SelectItem>();
-		cityList.add(new SelectItem("Barcelona", "Barcelona"));
-		cityList.add(new SelectItem("Madrid", "Madrid"));
-		cityList.add(new SelectItem("Sev", "Sevilla"));
+		cityList = new ArrayList<CityDTO>();
+		cityList.add(new CityDTO(1, "Barcelona", "España"));
+		cityList.add(new CityDTO(2, "Madrid", "España"));
+		cityList.add(new CityDTO(3, "Sevilla", "España"));		
 	}
 
-	public List<SelectItem> getCityList() {
+	public List<CityDTO> getCityList() {
 		return cityList;
 	}
 	

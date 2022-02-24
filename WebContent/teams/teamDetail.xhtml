@@ -20,9 +20,8 @@
 		<h:outputText value="Name"/>
 		<h:outputText value="#{teamDetailBean.teamDTO.name}"/>
 		<h:outputText value="City"/>
-		<h:selectOneMenu value="#{teamDetailBean.teamDTO.city}">
-			<f:selectItem itemLabel="None" itemValue="#{null}"/>
-			<f:selectItems value="#{dropdownsBean.cityList}" />
+		<h:selectOneMenu value="#{teamDetailBean.teamDTO.city}" converter="cityConverter">
+			<f:selectItems var="c" value="#{dropdownsBean.cityList}" itemLabel="#{c.name}"/>
 		</h:selectOneMenu>
 	</h:panelGrid>
 

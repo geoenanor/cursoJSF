@@ -10,24 +10,27 @@
     <title>JSF Training</title>
 </head>
 
+<f:metadata>
+	<f:phaseListener ></f:phaseListener>
+</f:metadata>
 
-<h:form>
-	<h:outputText value="#{userSessionBean.userName}"/>
-    <hr></hr>
-    
-	<h:panelGrid columns="2">
-		<h:outputText value="Code"/>
+
+<h:form>    
+	<h:panelGrid columns="2">    
+		<h:outputText value="#{label.code}"/>
 		<h:inputText value="#{teamsBean.newTeam.code}" required="true"/>
-		<h:outputText value="Name"/>
+		<h:outputText value="#{label.name}"/>
 		<h:inputText value="#{teamsBean.newTeam.name}" />
-		<h:outputText value="City"/>
-		<h:selectOneMenu value="#{teamsBean.newTeam.city}">
-			<f:selectItems value="#{dropdownsBean.cityList}" />
+		<h:outputText value="#{label.city}"/>
+		<h:selectOneMenu value="#{teamsBean.newTeam.city}" converter="cityConverter">
+			<f:selectItems var="c" value="#{dropdownsBean.cityList}" itemLabel="#{c.name}"/>
 		</h:selectOneMenu>
-		<h:outputText value="Coach"/>
+		<h:outputText value="#{label.coach}"/>
 		<h:inputText value="#{teamsBean.newTeam.coach}" />
 		
-		<h:commandButton actionListener="#{teamsBean.addTeam}" value="Add" />			
+		<h:commandButton actionListener="#{teamsBean.addTeam}" value="Add" />	
+		
+				
 	</h:panelGrid>
     
     <h:dataTable value="#{teamsBean.teamsList}" var="team">
