@@ -4,5 +4,21 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_3.xsd"
     version="2.3">
+    
+<!--     <converter> -->
+<!--     	<description>City Converter</description> -->
+<!--     	<converter-id>cityConverter</converter-id> -->
+<!--     	<converter-class>com.imagina.jsfdemo.faces.util.converters.CityConverter</converter-class> -->
+<!--     </converter> -->
+
+	<application>
+		<locale-config>
+            <default-locale>es</default-locale>
+        </locale-config>
+		<resource-bundle>
+			<base-name>i18n.labels</base-name>
+			<var>label</var>
+		</resource-bundle>
+	</application>
 
 </faces-config>
