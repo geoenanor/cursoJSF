@@ -24,7 +24,7 @@ public class TeamsBean implements Serializable {
 	
 	private String nameSearch;
 	
-	private static int order;
+	private int order;
 	@PostConstruct
 	public void initBean() {
 		loadTeamsList();
@@ -37,7 +37,7 @@ public class TeamsBean implements Serializable {
 	}
 	
 	public void sortTeamsByName() {
-		order *= -1;
+		order *= -1; //una vez ordenada podría directamente llamarse a Collection.reverse para invertir la lista
 		TeamComparatorbyName comp = new TeamComparatorbyName((order>0));
 		teamsList.sort(comp);
 	}
