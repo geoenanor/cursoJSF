@@ -12,21 +12,25 @@
 
 
 <h:form>    
-	<h:panelGrid columns="2">    
+	<h:panelGrid id="newTeamPanel" columns="3">    
 		<h:outputText value="#{label.code}"/>
-		<h:inputText value="#{teamsBean.newTeam.code}" required="true"/>
+		<h:inputText id="codeIn" value="#{teamsBean.newTeam.code}" required="true"/>
+		<h:message for="codeIn" />
+		
 		<h:outputText value="#{label.name}"/>
-		<h:inputText value="#{teamsBean.newTeam.name}" />
+		<h:inputText id="nameIn" value="#{teamsBean.newTeam.name}" required="true"/>
+		<h:message for="nameIn" />
 
 		<h:outputText value="#{label.coach}"/>
-		<h:inputText value="#{teamsBean.newTeam.coach}" />
-		
-		<h:commandButton actionListener="#{teamsBean.addTeam}" value="Add" />	
-		
-				
+		<h:inputText id="coachIn" value="#{teamsBean.newTeam.coach}" required="true"/>
+		<h:message for="coachIn" />						
 	</h:panelGrid>
+	<h:commandButton value="Add" >
+			<f:ajax listener="#{teamsBean.addTeam}" execute="newTeamPanel"
+				render="tableForm:teamsTable @form"/>
+		</h:commandButton>	
 </h:form>
-<h:form>    
+<h:form id="tableForm">    
 
     <h:dataTable id="teamsTable" value="#{teamsBean.filteredList}" var="team">
     	<h:column>
