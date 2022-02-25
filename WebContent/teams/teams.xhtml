@@ -27,7 +27,8 @@
 	</h:panelGrid>
 </h:form>
 <h:form>    
-    <h:dataTable value="#{teamsBean.filteredList}" var="team">
+
+    <h:dataTable id="teamsTable" value="#{teamsBean.filteredList}" var="team">
     	<h:column>
     		<f:facet name="header">Id</f:facet>
     		<h:outputText value="#{team.id}"/>
@@ -46,9 +47,11 @@
 
     	<h:column>
     		<f:facet name="header">
-    			<h:inputText value="#{teamsBean.coachFilter}"/>
-    			<h:commandButton value="Filter" 
-    				actionListener="#{teamsBean.filterCoach}"/>
+    			<h:inputText value="#{teamsBean.coachFilter}">
+    				<f:ajax event="keyup" listener="#{teamsBean.filterCoach}"
+    					render="teamsTable" />
+    			</h:inputText>
+
     		</f:facet>
     		<h:outputText value="#{team.coach}"/>
     	</h:column>

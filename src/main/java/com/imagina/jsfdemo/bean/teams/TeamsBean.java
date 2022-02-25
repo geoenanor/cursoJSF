@@ -44,11 +44,11 @@ public class TeamsBean implements Serializable {
 	public void sortTeamsByName() {
 		TeamComparatorbyName comp = new TeamComparatorbyName();
 		if (firstSort) {
-			teamsList.sort(comp);
+			filteredList.sort(comp);
 			firstSort = false;
 			
 		}else {
-			Collections.reverse(teamsList);
+			Collections.reverse(filteredList);
 		}	
 		
 	}
@@ -57,13 +57,14 @@ public class TeamsBean implements Serializable {
 		if (coachFilter == null || coachFilter.isEmpty()) {
 			filteredList = new ArrayList<TeamDTO>(teamsList);
 		}
-		filteredList = new ArrayList<>();
-		for (TeamDTO team : teamsList) {
-			if (team.getCoach().toLowerCase().contains(coachFilter.toLowerCase())) {
-				filteredList.add(team);
+		else {
+			filteredList = new ArrayList<>();
+			for (TeamDTO team : teamsList) {
+				if (team.getCoach().toLowerCase().contains(coachFilter.toLowerCase())) {
+					filteredList.add(team);
+				}
 			}
-		}
-		
+		}	
 	}
 	
 	public void addTeam() {
