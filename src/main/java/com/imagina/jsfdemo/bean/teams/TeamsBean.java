@@ -12,7 +12,6 @@ import javax.inject.Named;
 import com.imagina.jsfdemo.bean.dto.TeamComparatorbyName;
 import com.imagina.jsfdemo.bean.dto.TeamDTO;
 
-
 @Named
 @ViewScoped
 public class TeamsBean implements Serializable {
@@ -20,86 +19,84 @@ public class TeamsBean implements Serializable {
 	private static final long serialVersionUID = 9149473815682239832L;
 
 	private List<TeamDTO> teamsList;
-	
+
 	private List<TeamDTO> filteredList;
-	
+
 	private TeamDTO newTeam;
-	
+
 	private String nameSearch;
-	
+
 	private String coachFilter;
-	
+
 	private Boolean firstSort = true;
-	
+
 	@PostConstruct
 	public void initBean() {
 		loadTeamsList();
 		initVariables();
 	}
-	
+
 	private void initVariables() {
 		newTeam = new TeamDTO();
 	}
-	
+
 	public void sortTeamsByName() {
 		TeamComparatorbyName comp = new TeamComparatorbyName();
 		if (firstSort) {
 			filteredList.sort(comp);
 			firstSort = false;
-			
-		}else {
+
+		} else {
 			Collections.reverse(filteredList);
-		}	
-		
+		}
+
 	}
-	
+
 	public void filterCoach() {
 		if (coachFilter == null || coachFilter.isEmpty()) {
 			filteredList = new ArrayList<TeamDTO>(teamsList);
-		}
-		else {
+		} else {
 			filteredList = new ArrayList<>();
 			for (TeamDTO team : teamsList) {
 				if (team.getCoach().toLowerCase().contains(coachFilter.toLowerCase())) {
 					filteredList.add(team);
 				}
 			}
-		}	
+		}
 	}
-	
+
 	public void addTeam() {
-		newTeam.setId(teamsList.size()+1);
+		newTeam.setId(teamsList.size() + 1);
 		teamsList.add(newTeam);
 		newTeam = new TeamDTO();
 		filteredList = new ArrayList<TeamDTO>(teamsList);
 	}
-	
-	
+
 	public String goToDetail(String id) {
-		return "teamDetail?faces-redirect=true&teamId="+id;
+		return "teamDetail?faces-redirect=true&teamId=" + id;
 	}
-	
+
 	private void loadTeamsList() {
 		teamsList = new ArrayList<TeamDTO>();
-		
+
 		TeamDTO team = new TeamDTO();
-		team.setId(teamsList.size()+1);
+		team.setId(teamsList.size() + 1);
 		team.setCode("FCB");
 		team.setName("Futbol Club Barcelona");
 		team.setCity("BCN");
 		team.setCoach("Xavi");
 		teamsList.add(team);
-		
+
 		team = new TeamDTO();
-		team.setId(teamsList.size()+1);
+		team.setId(teamsList.size() + 1);
 		team.setCode("RM");
 		team.setName("Real Madrid");
 		team.setCity("Madrid");
 		team.setCoach("Ancelotti");
 		teamsList.add(team);
-		
+
 		team = new TeamDTO();
-		team.setId(teamsList.size()+1);
+		team.setId(teamsList.size() + 1);
 		team.setCode("AM");
 		team.setName("Atletico de Madrid");
 		team.setCity("Madrid");
@@ -149,5 +146,17 @@ public class TeamsBean implements Serializable {
 		this.filteredList = filteredList;
 	}
 
+	public void delete(String id) {
+
+		for (TeamDTO team : teamsList) {
+			if (team.getId() == Integer.parseInt(id)) {
+				teamsList.remove(team);
+				break;
+			}
+		}
+
+		filteredList = new ArrayList<TeamDTO>(teamsList);
+
+	}
 
 }
