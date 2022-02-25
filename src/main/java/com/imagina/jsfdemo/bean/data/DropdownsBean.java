@@ -27,9 +27,9 @@ public class DropdownsBean implements Serializable {
 	
 	private void initDropdowns() {
 		cityList = new ArrayList<CityDTO>();
-		cityList.add(new CityDTO(1, "Barcelona", "España"));
-		cityList.add(new CityDTO(2, "Madrid", "España"));
-		cityList.add(new CityDTO(3, "Sevilla", "España"));		
+		cityList.add(new CityDTO("Barcelona", "España"));
+		cityList.add(new CityDTO("Madrid", "España"));
+		cityList.add(new CityDTO("Sevilla", "España"));		
 	}
 
 	public List<CityDTO> getCityList() {

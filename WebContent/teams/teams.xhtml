@@ -6,34 +6,42 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
-<head>
+<h:head>
     <title>JSF Training</title>
-</head>
-
-<f:metadata>
-	<f:phaseListener ></f:phaseListener>
-</f:metadata>
+</h:head>
 
 
-<h:form>    
-	<h:panelGrid columns="2">    
+
+<h:form id="teamsForm">    
+	<h:panelGrid columns="3" id="addPanel">    
 		<h:outputText value="#{label.code}"/>
-		<h:inputText value="#{teamsBean.newTeam.code}" required="true"/>
+		<h:inputText value="#{teamsBean.newTeam.code}" required="true" id="codeInp">
+			<f:validateLength minimum="1"/>
+		</h:inputText>	
+		<h:message for="codeInp" />
 		<h:outputText value="#{label.name}"/>
-		<h:inputText value="#{teamsBean.newTeam.name}" />
-		<h:outputText value="#{label.city}"/>
-		<h:selectOneMenu value="#{teamsBean.newTeam.city}" converter="cityConverter">
-			<f:selectItems var="c" value="#{dropdownsBean.cityList}" itemLabel="#{c.name}"/>
-		</h:selectOneMenu>
-		<h:outputText value="#{label.coach}"/>
-		<h:inputText value="#{teamsBean.newTeam.coach}" />
+		<h:inputText value="#{teamsBean.newTeam.name}" id="nameIn"/>
+		<h:message for="nameIn" />
 		
-		<h:commandButton actionListener="#{teamsBean.addTeam}" value="Add" />	
+<!-- 		<h:outputText value="#{label.city}"/> -->
+<!-- 		<h:selectOneMenu value="#{teamsBean.newTeam.city}" converter="cityConverter" id="cityInp"> -->
+<!-- 			<f:selectItem  itemLabel="None" itemValue="#{null}"/> -->
+<!-- 			<f:selectItems var="c" value="#{dropdownsBean.cityList}" itemLabel="#{c.name}" itemValue="#{c}"/> -->
+<!-- 		</h:selectOneMenu> -->
+<!-- 		<h:message for="cityInp" /> -->
+		
+		<h:outputText value="#{label.coach}"/>
+		<h:inputText value="#{teamsBean.newTeam.coach}" id="coachInp"/>
+		<h:message for="coachInp" />
+		
+		<h:commandButton value="Add" actionListener="#{teamsBean.addTeam}">
+			<f:ajax event="click" execute=":teamsForm:addPanel" render="teamsTable addPanel" />
+		</h:commandButton>	
 		
 				
 	</h:panelGrid>
     
-    <h:dataTable value="#{teamsBean.teamsList}" var="team">
+    <h:dataTable value="#{teamsBean.teamsList}" var="team" id="teamsTable">
     	<h:column>
     		<f:facet name="header">Id</f:facet>
     		<h:outputText value="#{team.id}"/>
@@ -51,7 +59,7 @@
     	</h:column>
     	<h:column>
     		<f:facet name="header">City</f:facet>
-    		<h:outputText value="#{team.city}"/>
+    		<h:outputText value="#{team.city.name}"/>
     	</h:column>
     	<h:column>
     		<f:facet name="header">Coach</f:facet>

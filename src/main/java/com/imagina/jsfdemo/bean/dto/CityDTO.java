@@ -8,23 +8,20 @@ public class CityDTO implements Serializable{
 	private static final long serialVersionUID = -4877300990047883413L;
 	
 	
-	
-	public CityDTO(Integer id, String name, String country) {
+	public CityDTO() {
 		super();
-		this.id = id;
+
+	}
+	
+	public CityDTO(String name, String country) {
+		super();
 		this.name = name;
 		this.country = country;
 	}
 	
-	private Integer id;
 	private String name;
 	private String country;
-	public Integer getId() {
-		return id;
-	}
-	public void setId(Integer id) {
-		this.id = id;
-	}
+	
 
 	public String getName() {
 		return name;

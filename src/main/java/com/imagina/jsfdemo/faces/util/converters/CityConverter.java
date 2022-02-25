@@ -12,12 +12,18 @@ public class CityConverter implements Converter<CityDTO>{
 
 	@Override
 	public CityDTO getAsObject(FacesContext context, UIComponent component, String value) {
-		return new CityDTO(1, value, "España");
+		if (value != null) {
+			return new CityDTO(value, "España");
+		}
+		return null;
 	}
 
 	@Override
 	public String getAsString(FacesContext context, UIComponent component, CityDTO value) {
-		return value.getName();
+		if (value != null) {
+			return value.getName();
+		}
+		return null;
 	}
 
 }

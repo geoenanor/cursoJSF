@@ -6,9 +6,11 @@ import java.util.Collections;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
+import javax.faces.event.AjaxBehaviorEvent;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
+import com.imagina.jsfdemo.bean.dto.CityDTO;
 import com.imagina.jsfdemo.bean.dto.TeamComparatorbyName;
 import com.imagina.jsfdemo.bean.dto.TeamDTO;
 
@@ -40,7 +42,7 @@ public class TeamsBean implements Serializable {
 	}
 	
 	
-	
+
 	public void addTeam() {
 		newTeam.setId(teamsList.size()+1);
 		teamsList.add(newTeam);
@@ -55,31 +57,20 @@ public class TeamsBean implements Serializable {
 	private void loadTeamsList() {
 		teamsList = new ArrayList<TeamDTO>();
 		
+		teamsList.add(createTeam("FCB", "Futbol Club Barcelona", "Barcelona", "Xavi"));
+		teamsList.add(createTeam("AM", "Atletico de Madrid", "Madrid", "Cholo"));
+		teamsList.add(createTeam("RM", "Real Madrid", "Madrid", "Ancelotti"));
+	
+	}
+	
+	private TeamDTO createTeam(String code, String name, String city, String coach) {
 		TeamDTO team = new TeamDTO();
 		team.setId(teamsList.size()+1);
-		team.setCode("FCB");
-		team.setName("Futbol Club Barcelona");
-		team.setCity("BCN");
-		team.setCoach("Xavi");
-		teamsList.add(team);
-		
-		team = new TeamDTO();
-		team.setId(teamsList.size()+1);
-		team.setCode("RM");
-		team.setName("Real Madrid");
-		team.setCity("Madrid");
-		team.setCoach("Ancelotti");
-		teamsList.add(team);
-		
-		team = new TeamDTO();
-		team.setId(teamsList.size()+1);
-		team.setCode("AM");
-		team.setName("Atletico de Madrid");
-		team.setCity("Madrid");
-		team.setCoach("Cholo");
-		teamsList.add(team);
-
-		
+		team.setCode(code);
+		team.setName(name);
+		team.setCity(new CityDTO(city, "Spain"));
+		team.setCoach(coach);
+		return team;
 	}
 
 	public List<TeamDTO> getTeamsList() {

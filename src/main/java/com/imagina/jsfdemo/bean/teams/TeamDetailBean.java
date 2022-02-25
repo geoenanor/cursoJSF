@@ -5,6 +5,7 @@ import javax.enterprise.context.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
 
+import com.imagina.jsfdemo.bean.dto.CityDTO;
 import com.imagina.jsfdemo.bean.dto.TeamDTO;
 
 @Named
@@ -31,7 +32,7 @@ public class TeamDetailBean {
 		teamDTO.setId(id);
 		teamDTO.setCode("FCB");
 		teamDTO.setName("Futbol Club Barcelona");
-		teamDTO.setCity("Barcelona");
+		teamDTO.setCity(new CityDTO("Barcelona", "Spain"));
 	}
 
 	public TeamDTO getTeamDTO() {

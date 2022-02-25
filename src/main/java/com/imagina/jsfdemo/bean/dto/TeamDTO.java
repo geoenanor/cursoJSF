@@ -10,11 +10,18 @@ public class TeamDTO implements Serializable{
 	private Integer id;
 	private String code;
 	private String name;
-	private String city;
+	private CityDTO city;
 	private String coach;
 	
+	
+	
+	public TeamDTO() {
+		super();
+		city = new CityDTO();
+	}
+
 	public String isBarcelona() {
-		return this.city.equals("BCN") ? "Yes":"no";
+		return this.city.getName().equals("BCN") ? "Yes":"no";
 	}
 	
 	public Integer getId() {
@@ -35,10 +42,12 @@ public class TeamDTO implements Serializable{
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getCity() {
+
+	public CityDTO getCity() {
 		return city;
 	}
-	public void setCity(String city) {
+
+	public void setCity(CityDTO city) {
 		this.city = city;
 	}
 
