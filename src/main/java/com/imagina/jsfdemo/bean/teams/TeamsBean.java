@@ -71,6 +71,7 @@ public class TeamsBean implements Serializable {
 		newTeam.setId(teamsList.size()+1);
 		teamsList.add(newTeam);
 		newTeam = new TeamDTO();
+		filteredList = new ArrayList<TeamDTO>(teamsList);
 	}
 	
 	
