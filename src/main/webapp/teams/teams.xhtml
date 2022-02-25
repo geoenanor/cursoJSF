@@ -6,7 +6,8 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:jsf="http://xmlns.jcp.org/jsf">
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
+      xmlns:mini="http://java.sun.com/jsf/composite/components">
 <h:head>
     <title>JSF Training</title>
 </h:head>
@@ -66,6 +67,11 @@
     			 value="Name" immediate="true"/>
     		</f:facet>
     		<h:outputText value="#{team.name}"/>
+    	</h:column>
+    	
+    	<h:column>
+    		<mini:shield iconLink="https://pbs.twimg.com/profile_images/1409740934217142273/-RmOAoJG.jpg"
+    			link="enlace"/>
     	</h:column>
 
     	<h:column>
