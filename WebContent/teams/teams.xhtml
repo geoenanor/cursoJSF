@@ -11,37 +11,23 @@
 </h:head>
 
 
-
-<h:form id="teamsForm">    
-	<h:panelGrid columns="3" id="addPanel">    
+<h:form>    
+	<h:panelGrid columns="2">    
 		<h:outputText value="#{label.code}"/>
-		<h:inputText value="#{teamsBean.newTeam.code}" required="true" id="codeInp">
-			<f:validateLength minimum="1"/>
-		</h:inputText>	
-		<h:message for="codeInp" />
+		<h:inputText value="#{teamsBean.newTeam.code}" required="true"/>
 		<h:outputText value="#{label.name}"/>
-		<h:inputText value="#{teamsBean.newTeam.name}" id="nameIn"/>
-		<h:message for="nameIn" />
-		
-<!-- 		<h:outputText value="#{label.city}"/> -->
-<!-- 		<h:selectOneMenu value="#{teamsBean.newTeam.city}" converter="cityConverter" id="cityInp"> -->
-<!-- 			<f:selectItem  itemLabel="None" itemValue="#{null}"/> -->
-<!-- 			<f:selectItems var="c" value="#{dropdownsBean.cityList}" itemLabel="#{c.name}" itemValue="#{c}"/> -->
-<!-- 		</h:selectOneMenu> -->
-<!-- 		<h:message for="cityInp" /> -->
-		
+		<h:inputText value="#{teamsBean.newTeam.name}" />
+
 		<h:outputText value="#{label.coach}"/>
-		<h:inputText value="#{teamsBean.newTeam.coach}" id="coachInp"/>
-		<h:message for="coachInp" />
+		<h:inputText value="#{teamsBean.newTeam.coach}" />
 		
-		<h:commandButton value="Add" actionListener="#{teamsBean.addTeam}">
-			<f:ajax event="click" execute=":teamsForm:addPanel" render="teamsTable addPanel" />
-		</h:commandButton>	
+		<h:commandButton actionListener="#{teamsBean.addTeam}" value="Add" />	
 		
 				
 	</h:panelGrid>
-    
-    <h:dataTable value="#{teamsBean.teamsList}" var="team" id="teamsTable">
+</h:form>
+<h:form>    
+    <h:dataTable value="#{teamsBean.filteredList}" var="team">
     	<h:column>
     		<f:facet name="header">Id</f:facet>
     		<h:outputText value="#{team.id}"/>
@@ -57,12 +43,13 @@
     		</f:facet>
     		<h:outputText value="#{team.name}"/>
     	</h:column>
+
     	<h:column>
-    		<f:facet name="header">City</f:facet>
-    		<h:outputText value="#{team.city.name}"/>
-    	</h:column>
-    	<h:column>
-    		<f:facet name="header">Coach</f:facet>
+    		<f:facet name="header">
+    			<h:inputText value="#{teamsBean.coachFilter}"/>
+    			<h:commandButton value="Filter" 
+    				actionListener="#{teamsBean.filterCoach}"/>
+    		</f:facet>
     		<h:outputText value="#{team.coach}"/>
     	</h:column>
     	<h:column>
