@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
@@ -58,12 +59,9 @@ public class TeamsBean implements Serializable {
 			filteredList = new ArrayList<TeamDTO>(teamsList);
 		}
 		else {
-			filteredList = new ArrayList<>();
-			for (TeamDTO team : teamsList) {
-				if (team.getCoach().toLowerCase().contains(coachFilter.toLowerCase())) {
-					filteredList.add(team);
-				}
-			}
+			filteredList = teamsList.stream()
+					.filter(team ->team.getCoach().toLowerCase().contains(coachFilter.toLowerCase()))
+					.collect(Collectors.toList());
 		}	
 	}
 	
@@ -72,6 +70,23 @@ public class TeamsBean implements Serializable {
 		teamsList.add(newTeam);
 		newTeam = new TeamDTO();
 		filteredList = new ArrayList<TeamDTO>(teamsList);
+	}
+	
+	public void deleteTeam(Integer id) {
+		
+		teamsList.stream()
+			.filter(t -> t.getId().equals(id))
+			.findFirst().map(t -> teamsList.remove(t));
+		/*
+		for (TeamDTO team : teamsList) {
+			if (team.getId().equals(id)) {
+				teamsList.remove(team);
+				break;
+			}
+		}
+		*/
+		filteredList = new ArrayList<TeamDTO>(teamsList);
+		
 	}
 	
 	

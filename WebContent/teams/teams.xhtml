@@ -63,6 +63,12 @@
     		<h:commandLink value="View team" action="#{teamsBean.goToDetail(team.id)}" immediate="true"/>	
     	</h:column>
     	
+    	<h:column>
+    		<h:commandButton value="Delete">
+    			<f:ajax listener="#{teamsBean.deleteTeam(team.id)}" render="@form"/>
+    		</h:commandButton>
+    	</h:column>
+    	
 
     </h:dataTable>
 

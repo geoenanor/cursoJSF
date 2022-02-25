@@ -1,6 +1,7 @@
 package com.imagina.jsfdemo.bean.dto;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 public class TeamDTO implements Serializable{
 	
