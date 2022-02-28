@@ -67,6 +67,13 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/x
 		    <artifactId>weld-servlet-shaded</artifactId>
 		    <version>3.1.9.Final</version>
 		</dependency>
+		
+		<!-- Primefaces Library  -->
+	<dependency>
+	    <groupId>org.primefaces</groupId>
+	    <artifactId>primefaces</artifactId>
+	    <version>11.0.0</version>
+	</dependency>
 
   
   </dependencies>
