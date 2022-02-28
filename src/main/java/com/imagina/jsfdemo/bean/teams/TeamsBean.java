@@ -23,7 +23,7 @@ public class TeamsBean implements Serializable {
 	private List<TeamDTO> teamsList;
 	
 	private List<TeamDTO> filteredList;
-	
+
 	private TeamDTO newTeam;
 	
 	private String nameSearch;

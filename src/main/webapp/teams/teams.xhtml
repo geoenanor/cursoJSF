@@ -15,12 +15,15 @@
 
 
 <h:form id="newTeamForm">    
+	<p:messages id="messages" showDetail="true" closable="true">
+            <p:autoUpdate/>
+       </p:messages>
 	<h:panelGroup id="newTeamPanel">
 	<p:panelGrid  columns="2">    
 
 
 		<label jsf:for="codeIn"
-				jsf:value="#{label.code}" /><br />
+				jsf:value="#{label.code}" />
 				
 		<input jsf:id="codeIn" size="40" 
 				jsf:value="#{teamsBean.newTeam.code}" data-required="true" 
@@ -35,20 +38,33 @@
 		<h:inputText id="coachIn" value="#{teamsBean.newTeam.coach}" required="true"/>
 					
 	</p:panelGrid>
-		<p:commandButton value="Add" actionListener="#{teamsBean.addTeam}" 
-			process="newTeamPanel" update="tableForm:teamsTable @form"  ajax="false"/>
+		
 
 </h:panelGroup>
 		
 </h:form>
 <h:form id="tableForm">    
 
-   	<p:commandButton value="PDF" styleClass="p-mr-2 p-mb-2">
-     	<p:dataExporter type="pdf" target="teamsTable" fileName="teams" />
-     </p:commandButton>
-     <p:commandButton value="Excel" styleClass="p-mr-2 p-mb-2">
-     	<p:dataExporter type="xls" target="teamsTable" fileName="teams"/>
-     </p:commandButton>
+	<p:toolbar>
+            <p:toolbarGroup>
+            	<p:commandButton value="Add" actionListener="#{teamsBean.addTeam}" 
+				   process=":newTeamForm" update="tableForm:teamsTable @form"  ajax="false"/>           	
+           </p:toolbarGroup>
+           <p:toolbarGroup align="right">
+           	<p:commandButton value="Excel" styleClass="p-mr-2 p-mb-2">
+		     	<p:dataExporter type="xls" target="teamsTable" fileName="teams"/>
+		     </p:commandButton>
+		     <p:commandButton value="PDF" styleClass="p-mr-2 p-mb-2">
+			     	<p:dataExporter type="pdf" target="teamsTable" fileName="teams" />
+			     </p:commandButton>
+           </p:toolbarGroup>
+    </p:toolbar>       
+
+   	
+     
+
+
+     
     <p:dataTable id="teamsTable" value="#{teamsBean.filteredList}" var="team"
     	paginator="true" rows="3"
     	rowsPerPageTemplate="5,10,{ShowAll|'All'}"
