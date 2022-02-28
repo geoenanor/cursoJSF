@@ -43,50 +43,45 @@
 </h:form>
 <h:form id="tableForm">    
 
-    <h:dataTable id="teamsTable" value="#{teamsBean.filteredList}" var="team">
-    	<h:column>
+    <p:dataTable id="teamsTable" value="#{teamsBean.filteredList}" var="team">
+    	<p:column>
     		<f:facet name="header">Id</f:facet>
     		<h:outputText value="#{team.id}"/>
-    	</h:column>
-    	<h:column>
+    	</p:column>
+    	<p:column>
     		<f:facet name="header">Code</f:facet>
     		<h:outputText value="#{team.code}"/>
-    	</h:column>
-    	<h:column>
-    		<f:facet name="header">
-    			<h:commandLink actionListener="#{teamsBean.sortTeamsByName}"
-    			 value="Name" immediate="true"/>
-    		</f:facet>
+    	</p:column>
+    	<p:column headerText="#{label.name}" sortBy="#{team.name}" sortOrder="asc">
     		<h:outputText value="#{team.name}"/>
-    	</h:column>
+    	</p:column>
     	
-    	<h:column>
+    	<p:column>
     		<mini:shield iconLink="https://pbs.twimg.com/profile_images/1409740934217142273/-RmOAoJG.jpg"
     			link="enlace"/>
-    	</h:column>
+    	</p:column>
 
-    	<h:column>
+    	<p:column>
     		<f:facet name="header">
-    			<h:inputText value="#{teamsBean.coachFilter}">
-    				<f:ajax event="keyup" listener="#{teamsBean.filterCoach}"
-    					render="teamsTable" />
-    			</h:inputText>
+    			<p:inputText value="#{teamsBean.coachFilter}">
+    				<p:ajax event="keyup" listener="#{teamsBean.filterCoach}" update="teamsTable"
+    					delay="500"/>
+    			</p:inputText>
 
     		</f:facet>
     		<h:outputText value="#{team.coach}"/>
-    	</h:column>
-    	<h:column>
-    		<h:commandLink value="View team" action="#{teamsBean.goToDetail(team.id)}" immediate="true"/>	
-    	</h:column>
+    	</p:column>
+    	<p:column>
+    		<p:commandButton value="View team" action="#{teamsBean.goToDetail(team.id)}" ajax="false"/>
+    	</p:column>
     	
-    	<h:column>
-    		<h:commandButton value="Delete">
-    			<f:ajax listener="#{teamsBean.deleteTeam(team.id)}" render="@form"/>
-    		</h:commandButton>
-    	</h:column>
+    	<p:column>
+    		<p:commandButton id="addButton" value="Delete" actionListener="#{teamsBean.deleteTeam(team.id)}" update="@form"
+    			process="@this"/>
+    	</p:column>
     	
 
-    </h:dataTable>
+    </p:dataTable>
 
 </h:form>
 

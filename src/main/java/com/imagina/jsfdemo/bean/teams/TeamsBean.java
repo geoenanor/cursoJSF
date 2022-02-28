@@ -30,8 +30,6 @@ public class TeamsBean implements Serializable {
 	
 	private String coachFilter;
 	
-	private Boolean firstSort = true;
-	
 	@PostConstruct
 	public void initBean() {
 		loadTeamsList();
@@ -42,18 +40,7 @@ public class TeamsBean implements Serializable {
 		newTeam = new TeamDTO();
 	}
 	
-	public void sortTeamsByName() {
-		TeamComparatorbyName comp = new TeamComparatorbyName();
-		if (firstSort) {
-			filteredList.sort(comp);
-			firstSort = false;
-			
-		}else {
-			Collections.reverse(filteredList);
-		}	
-		
-	}
-	
+
 	public void filterCoach() {
 		if (coachFilter == null || coachFilter.isEmpty()) {
 			filteredList = new ArrayList<TeamDTO>(teamsList);
