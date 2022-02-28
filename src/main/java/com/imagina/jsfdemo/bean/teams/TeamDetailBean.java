@@ -17,6 +17,8 @@ public class TeamDetailBean {
 	
 	private TeamDTO teamDTO;
 	
+	private String lastResult;
+	
 	@PostConstruct
 	public void initBean( ) {
 		if (FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().containsKey("teamId")) {
@@ -33,6 +35,12 @@ public class TeamDetailBean {
 		teamDTO.setName("Futbol Club Barcelona");
 		teamDTO.setCity("Barcelona");
 	}
+	
+	
+	public void loadLastResult() throws InterruptedException {
+		lastResult = "3 - 0 VICTORY";
+		Thread.sleep(3000);
+	}
 
 	public TeamDTO getTeamDTO() {
 		return teamDTO;
@@ -48,6 +56,10 @@ public class TeamDetailBean {
 
 	public void setId(String id) {
 		this.id = id;
+	}
+
+	public String getLastResult() {
+		return lastResult;
 	}
 
 	
