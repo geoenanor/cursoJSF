@@ -33,11 +33,13 @@ public class TeamsBean implements Serializable {
 	@PostConstruct
 	public void initBean() {
 		loadTeamsList();
-		initVariables();
+	//	initVariables();
 	}
 	
-	private void initVariables() {
+
+	public void initVariables() {
 		newTeam = new TeamDTO();
+		newTeam.setCode("XX");
 	}
 	
 

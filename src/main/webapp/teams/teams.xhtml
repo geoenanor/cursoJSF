@@ -20,8 +20,8 @@
        </p:messages>
 	<p:toolbar>
             <p:toolbarGroup>
-            	<p:commandButton value="Add" onclick="PF('addTeamDialog').show();"
-            		immediate="true" />           	
+            	<p:commandButton value="Add" oncomplete="PF('addTeamDialog').show();" actionListener="#{teamsBean.initVariables}"
+            		update="newTeamForm"/>           	
            </p:toolbarGroup>
            <p:toolbarGroup align="right">
            	<p:commandButton value="Excel" styleClass="p-mr-2 p-mb-2 ui-button-secondary">
