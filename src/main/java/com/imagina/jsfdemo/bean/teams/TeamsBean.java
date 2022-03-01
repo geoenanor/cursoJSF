@@ -33,12 +33,9 @@ public class TeamsBean implements Serializable {
 	@PostConstruct
 	public void initBean() {
 		loadTeamsList();
-		initVariables();
 	}
 	
-	private void initVariables() {
-		newTeam = new TeamDTO();
-	}
+
 	
 
 	public void filterCoach() {
@@ -50,6 +47,11 @@ public class TeamsBean implements Serializable {
 					.filter(team ->team.getCoach().toLowerCase().contains(coachFilter.toLowerCase()))
 					.collect(Collectors.toList());
 		}	
+	}
+
+	public void prepareToAddTeam() {
+		newTeam = new TeamDTO();
+		newTeam.setCode("xxx");
 	}
 	
 	public void addTeam() {

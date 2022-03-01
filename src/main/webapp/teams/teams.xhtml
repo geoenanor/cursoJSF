@@ -11,17 +11,34 @@
       xmlns:p="http://primefaces.org/ui">
 <h:head>
     <title>JSF Training</title>
+    <link rel="stylesheet" href="https://unpkg.com/primeflex@3.1.0/primeflex.css" />
 </h:head>
-
 
 <h:form id="tableForm">    
 	<p:messages id="messages" showDetail="true" closable="true">
             <p:autoUpdate/>
        </p:messages>
+    
+    <div class="card">
+	    <div class="flex card-container indigo-container">
+			<p:commandButton value="Add" onclick="PF('addTeamDialog').show();"
+				immediate="true" styleClass="flex-1 m-3 ui-button-secondary"/>
+			<p:commandButton value="Excel" styleClass="flex-1 m-3 ui-button-secondary">
+				<p:dataExporter type="xls" target="teamsTable" fileName="teams" />
+			</p:commandButton>
+			<p:commandButton value="PDF"
+				styleClass="flex-1 m-3 ui-button-info">
+				<p:dataExporter type="pdf" target="teamsTable" fileName="teams" />
+			</p:commandButton>
+			
+		</div>
+	</div>
+       
 	<p:toolbar>
             <p:toolbarGroup>
-            	<p:commandButton value="Add" onclick="PF('addTeamDialog').show();"
-            		immediate="true" />           	
+            	<p:commandButton value="Add" actionListener="#{teamsBean.prepareToAddTeam}"
+            		oncomplete="PF('addTeamDialog').show();"
+            		update="newTeamForm:addTeamDialog" />           	
            </p:toolbarGroup>
            <p:toolbarGroup align="right">
            	<p:commandButton value="Excel" styleClass="p-mr-2 p-mb-2 ui-button-secondary">
@@ -96,7 +113,7 @@
 				<h:outputText value="#{label.coach}"/>
 				<h:inputText id="coachIn" value="#{teamsBean.newTeam.coach}" required="true"/>
 							
-			</p:panelGrid>						
+			</p:panelGrid>					
 		</h:panelGroup>
 		<p:commandButton value="Save" actionListener="#{teamsBean.addTeam}" 
 				   process=":newTeamForm" update="tableForm:teamsTable"
