@@ -10,6 +10,9 @@ import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
+import org.primefaces.component.fileupload.FileUpload;
+import org.primefaces.model.file.UploadedFile;
+
 import com.imagina.jsfdemo.bean.dto.TeamComparatorbyName;
 import com.imagina.jsfdemo.bean.dto.TeamDTO;
 
@@ -29,6 +32,8 @@ public class TeamsBean implements Serializable {
 	private String nameSearch;
 	
 	private String coachFilter;
+		
+	private UploadedFile iconUpload;
 	
 	@PostConstruct
 	public void initBean() {
@@ -51,11 +56,12 @@ public class TeamsBean implements Serializable {
 
 	public void prepareToAddTeam() {
 		newTeam = new TeamDTO();
+		newTeam.setId(teamsList.size()+1);
 		newTeam.setCode("xxx");
 	}
 	
-	public void addTeam() {
-		newTeam.setId(teamsList.size()+1);
+	public void addTeam() {		
+		newTeam.setIcon(iconUpload.getContent());
 		teamsList.add(newTeam);
 		newTeam = new TeamDTO();
 		filteredList = new ArrayList<TeamDTO>(teamsList);
@@ -152,6 +158,21 @@ public class TeamsBean implements Serializable {
 	public void setFilteredList(List<TeamDTO> filteredList) {
 		this.filteredList = filteredList;
 	}
+
+
+
+
+	public UploadedFile getIconUpload() {
+		return iconUpload;
+	}
+
+
+
+
+	public void setIconUpload(UploadedFile iconUpload) {
+		this.iconUpload = iconUpload;
+	}
+
 
 
 }

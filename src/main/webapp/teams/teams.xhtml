@@ -62,6 +62,10 @@
     		<h:outputText value="#{team.id}"/>
     	</p:column>
     	<p:column>
+    		<p:graphicImage value="#{team.icon}" stream="false" style="height:20px"
+    			rendered="#{team.icon ne null}"/>
+    	</p:column>
+    	<p:column>
     		<f:facet name="header">Code</f:facet>
     		<h:outputText value="#{team.code}"/>
     	</p:column>
@@ -70,7 +74,7 @@
     	</p:column>
     	
     	<p:column exportable="false">
-    		<mini:shield iconLink="https://pbs.twimg.com/profile_images/1409740934217142273/-RmOAoJG.jpg"
+    		<mini:shield icon="#{team.icon}"
     			link="enlace"/>
     	</p:column>
 
@@ -92,29 +96,44 @@
     </p:dataTable>    
 
 </h:form>
-<h:form id="newTeamForm">
+<h:form id="newTeamForm" enctype="multipart/form-data">
 
     <p:dialog id="addTeamDialog" header="Add team" widgetVar="addTeamDialog" modal="true" >
-    	<h:panelGroup id="newTeamPanel">
-			<p:panelGrid  columns="2">    
-				
-				<label jsf:for="codeIn"
-						jsf:value="#{label.code}" />
-						
-				<input jsf:id="codeIn" size="40" 
-						jsf:value="#{teamsBean.newTeam.code}" data-required="true" 
-						type="text" placeholder="Introduzca un código" autofocus="autofocus" />
-						
-						
-				<p:outputLabel for="nameIn" value="#{label.name}"/>
-				<p:inputText id="nameIn" value="#{teamsBean.newTeam.name}" required="true" />
-		
-		
-				<h:outputText value="#{label.coach}"/>
-				<h:inputText id="coachIn" value="#{teamsBean.newTeam.coach}" required="true"/>
-							
-			</p:panelGrid>					
-		</h:panelGroup>
+		<div class="card ">
+			<div class="field grid">
+				<label jsf:for="codeIn" jsf:value="#{label.code}" class="col-fixed"
+					style="width: 100px"></label>
+				<div class="col">
+					<input jsf:id="codeIn" jsf:value="#{teamsBean.newTeam.code}"
+						type="text" class="inputfield" />
+				</div>
+			</div>
+			<div class="field grid">
+				<label jsf:for="nameIn" jsf:value="#{label.name}" class="col-fixed"
+					style="width: 100px"></label>
+				<div class="col">
+					<input jsf:id="nameIn" jsf:value="#{teamsBean.newTeam.name}"
+						type="text" class="inputfield" required="true" />
+				</div>
+			</div>
+			<div class="field grid">
+				<label jsf:for="coachIn" jsf:value="#{label.coach}" class="col-fixed"
+					style="width: 100px"></label>
+				<div class="col">
+					<input jsf:id="coachIn" jsf:value="#{teamsBean.newTeam.coach}"
+						type="text" class="inputfield" required="true" />
+				</div>
+			</div>
+			<div class="field grid">
+				<p:outputLabel for="iconUpload" value="Icon"/>
+				<div class="col">
+					<p:fileUpload id="iconUpload" 
+						value="#{teamsBean.iconUpload}" 
+						mode="simple" skinSimple="true"/>
+				</div>
+			</div>
+		</div>
+
 		<p:commandButton value="Save" actionListener="#{teamsBean.addTeam}" 
 				   process=":newTeamForm" update="tableForm:teamsTable"
 				   oncomplete="if (!args.validationFailed){PF('addTeamDialog').hide()}"/>  

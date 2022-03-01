@@ -13,6 +13,7 @@ public class TeamDTO implements Serializable{
 	private String name;
 	private String city;
 	private String coach;
+	private byte[] icon;
 	
 
 
@@ -55,6 +56,14 @@ public class TeamDTO implements Serializable{
 
 	public void setCoach(String coach) {
 		this.coach = coach;
+	}
+
+	public byte[] getIcon() {
+		return icon;
+	}
+
+	public void setIcon(byte[] icon) {
+		this.icon = icon;
 	}
 	
 	
