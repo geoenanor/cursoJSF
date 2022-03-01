@@ -41,6 +41,11 @@ public class TeamsBean implements Serializable {
 	}
 	
 
+	public void increaseCode() {
+		for (TeamDTO team : filteredList) {
+			team.setCode(team.getCode()+1);
+		}
+	}
 	
 
 	public void filterCoach() {

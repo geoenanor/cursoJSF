@@ -18,6 +18,9 @@
 	<p:messages id="messages" showDetail="true" closable="true">
             <p:autoUpdate/>
        </p:messages>
+       
+    <p:remoteCommand actionListener="#{teamsBean.increaseCode}" 
+    	name="increase" update="teamsTable"/>   
     
     <div class="card">
 	    <div class="flex card-container indigo-container">
@@ -136,7 +139,7 @@
 
 		<p:commandButton value="Save" actionListener="#{teamsBean.addTeam}" 
 				   process=":newTeamForm" update="tableForm:teamsTable"
-				   oncomplete="if (!args.validationFailed){PF('addTeamDialog').hide()}"/>  
+				   oncomplete="if (!args.validationFailed){PF('addTeamDialog').hide();increase();}"/>  
     </p:dialog>
 </h:form>
 
