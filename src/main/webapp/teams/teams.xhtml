@@ -3,105 +3,125 @@
         PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:jsf="http://xmlns.jcp.org/jsf"
-      xmlns:mini="http://xmlns.jcp.org/jsf/composite/components"
-      xmlns:p="http://primefaces.org/ui">
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:mini="http://xmlns.jcp.org/jsf/composite/components"
+	xmlns:p="http://primefaces.org/ui">
 <h:head>
-    <title>JSF Training</title>
-    <link rel="stylesheet" href="https://unpkg.com/primeflex@3.1.0/primeflex.css" />
+	<title>JSF Training</title>
+	<link rel="stylesheet"
+		href="https://unpkg.com/primeflex@3.1.0/primeflex.css" />
+
+<!-- 	<script type="text/javascript"> -->
+// 	$(document).ready(function() {
+// 	        while(true){
+// 	        	increase();
+// 	        	sleep(2);
+// 	        }
+	        
+// 	    }
+<!-- 	</script> -->
+
 </h:head>
 
-<h:form id="tableForm">    
+<h:form id="tableForm">
 	<p:messages id="messages" showDetail="true" closable="true">
-            <p:autoUpdate/>
-       </p:messages>
-       
-    <p:remoteCommand actionListener="#{teamsBean.increaseCode}" 
-    	name="increase" update="teamsTable"/>   
-    
-    <div class="card">
-	    <div class="flex card-container indigo-container">
+		<p:autoUpdate />
+	</p:messages>
+
+	<p:remoteCommand actionListener="#{teamsBean.increaseCode}"
+		name="increase" update="teamsTable" />
+
+
+
+	<div class="card">
+		<div class="flex card-container indigo-container">
 			<p:commandButton value="Add" onclick="PF('addTeamDialog').show();"
-				immediate="true" styleClass="flex-1 m-3 ui-button-secondary"/>
-			<p:commandButton value="Excel" styleClass="flex-1 m-3 ui-button-secondary">
+				immediate="true" styleClass="flex-1 m-3 ui-button-secondary" />
+			<p:commandButton value="Excel"
+				styleClass="flex-1 m-3 ui-button-secondary">
+				<p:dataExporter type="xls" target="teamsTable" fileName="teams" />
+			</p:commandButton>
+			<p:commandButton value="PDF" styleClass="flex-1 m-3 ui-button-info">
+				<p:dataExporter type="pdf" target="teamsTable" fileName="teams" />
+			</p:commandButton>
+
+		</div>
+	</div>
+
+	<p:toolbar>
+		<p:toolbarGroup>
+			<p:commandButton value="Add"
+				actionListener="#{teamsBean.prepareToAddTeam}"
+				oncomplete="PF('addTeamDialog').show();"
+				update="newTeamForm:addTeamDialog" />
+		</p:toolbarGroup>
+		<p:toolbarGroup align="right">
+			<p:commandButton value="Excel"
+				styleClass="p-mr-2 p-mb-2 ui-button-secondary">
 				<p:dataExporter type="xls" target="teamsTable" fileName="teams" />
 			</p:commandButton>
 			<p:commandButton value="PDF"
-				styleClass="flex-1 m-3 ui-button-info">
+				styleClass="p-mr-2 p-mb-2 ui-button-info">
 				<p:dataExporter type="pdf" target="teamsTable" fileName="teams" />
 			</p:commandButton>
-			
-		</div>
-	</div>
-       
-	<p:toolbar>
-            <p:toolbarGroup>
-            	<p:commandButton value="Add" actionListener="#{teamsBean.prepareToAddTeam}"
-            		oncomplete="PF('addTeamDialog').show();"
-            		update="newTeamForm:addTeamDialog" />           	
-           </p:toolbarGroup>
-           <p:toolbarGroup align="right">
-           	<p:commandButton value="Excel" styleClass="p-mr-2 p-mb-2 ui-button-secondary">
-		     	<p:dataExporter type="xls" target="teamsTable" fileName="teams"/>
-		     </p:commandButton>
-		     <p:commandButton value="PDF" styleClass="p-mr-2 p-mb-2 ui-button-info">
-			     	<p:dataExporter type="pdf" target="teamsTable" fileName="teams" />
-			     </p:commandButton>
-           </p:toolbarGroup>
-    </p:toolbar>       
+		</p:toolbarGroup>
+	</p:toolbar>
 
-     
-    <p:dataTable id="teamsTable"  value="#{teamsBean.filteredList}" var="team"
-    	paginator="true" rows="3"
-    	paginatorPosition="top"
-    	rowsPerPageTemplate="5,10,{ShowAll|'All'}"
-    	draggableColumns="true"
-    	resizableColumns="true">
-    	<p:column>
-    		<f:facet name="header">Id</f:facet>
-    		<h:outputText value="#{team.id}"/>
-    	</p:column>
-    	<p:column>
-    		<p:graphicImage value="#{team.icon}" stream="false" style="height:20px"
-    			rendered="#{team.icon ne null}"/>
-    	</p:column>
-    	<p:column>
-    		<f:facet name="header">Code</f:facet>
-    		<h:outputText value="#{team.code}"/>
-    	</p:column>
-    	<p:column headerText="#{label.name}" sortBy="#{team.name}" sortOrder="asc">
-    		<h:outputText value="#{team.name}"/>
-    	</p:column>
-    	
-    	<p:column exportable="false">
-    		<mini:shield icon="#{team.icon}"
-    			link="enlace"/>
-    	</p:column>
 
-    	<p:column headerText="#{label.coach}" filterBy="#{team.coach}" filterMatchMode="startsWith">
-    		<h:outputText value="#{team.coach}"/>
-    	</p:column>
-    	<p:column exportable="false">
-	    	<p:toolbar>
-	    		<p:toolbarGroup>
-	    		<p:commandButton type="button" icon="pi pi-search"  action="#{teamsBean.goToDetail(team.id)}" ajax="false"
-	    			styleClass="ui-button-help p-mr-2" />
-	    		<p:commandButton type="button" id="addButton" actionListener="#{teamsBean.deleteTeam(team.id)}" update="@form"
-	    			process="@this" icon="pi pi-trash" styleClass="ui-button-help p-mr-2" />
-	    		</p:toolbarGroup>
-	    	</p:toolbar>	
-    	</p:column>
-		
-    	
-    </p:dataTable>    
+	<p:dataTable id="teamsTable" value="#{teamsBean.filteredList}"
+		var="team" paginator="true" rows="3" paginatorPosition="top"
+		rowsPerPageTemplate="5,10,{ShowAll|'All'}" draggableColumns="true"
+		resizableColumns="true">
+		<p:column>
+			<f:facet name="header">Id</f:facet>
+			<h:outputText value="#{team.id}" />
+		</p:column>
+		<p:column>
+			<p:graphicImage value="#{team.icon}" stream="false"
+				style="height:20px" rendered="#{team.icon ne null}" />
+		</p:column>
+		<p:column>
+			<f:facet name="header">Code</f:facet>
+			<h:outputText value="#{team.code}" />
+		</p:column>
+		<p:column headerText="#{label.name}" sortBy="#{team.name}"
+			sortOrder="asc">
+			<h:outputText value="#{team.name}" />
+		</p:column>
+
+		<p:column exportable="false">
+			<mini:shield icon="#{team.icon}" link="enlace" />
+		</p:column>
+
+		<p:column headerText="#{label.coach}" filterBy="#{team.coach}"
+			filterMatchMode="startsWith">
+			<h:outputText value="#{team.coach}" />
+		</p:column>
+		<p:column exportable="false">
+			<p:toolbar>
+				<p:toolbarGroup>
+					<p:commandButton type="button" icon="pi pi-search"
+						action="#{teamsBean.goToDetail(team.id)}" ajax="false"
+						styleClass="ui-button-help p-mr-2" />
+					<p:commandButton type="button" id="addButton"
+						actionListener="#{teamsBean.deleteTeam(team.id)}" update="@form"
+						process="@this" icon="pi pi-trash"
+						styleClass="ui-button-help p-mr-2" />
+				</p:toolbarGroup>
+			</p:toolbar>
+		</p:column>
+
+
+	</p:dataTable>
 
 </h:form>
 <h:form id="newTeamForm" enctype="multipart/form-data">
 
-    <p:dialog id="addTeamDialog" header="Add team" widgetVar="addTeamDialog" modal="true" >
+	<p:dialog id="addTeamDialog" header="Add team"
+		widgetVar="addTeamDialog" modal="true">
 		<div class="card ">
 			<div class="field grid">
 				<label jsf:for="codeIn" jsf:value="#{label.code}" class="col-fixed"
@@ -120,27 +140,25 @@
 				</div>
 			</div>
 			<div class="field grid">
-				<label jsf:for="coachIn" jsf:value="#{label.coach}" class="col-fixed"
-					style="width: 100px"></label>
+				<label jsf:for="coachIn" jsf:value="#{label.coach}"
+					class="col-fixed" style="width: 100px"></label>
 				<div class="col">
 					<input jsf:id="coachIn" jsf:value="#{teamsBean.newTeam.coach}"
 						type="text" class="inputfield" required="true" />
 				</div>
 			</div>
 			<div class="field grid">
-				<p:outputLabel for="iconUpload" value="Icon"/>
+				<p:outputLabel for="iconUpload" value="Icon" />
 				<div class="col">
-					<p:fileUpload id="iconUpload" 
-						value="#{teamsBean.iconUpload}" 
-						mode="simple" skinSimple="true"/>
+					<p:fileUpload id="iconUpload" value="#{teamsBean.iconUpload}"
+						mode="simple" skinSimple="true" />
 				</div>
 			</div>
 		</div>
 
-		<p:commandButton value="Save" actionListener="#{teamsBean.addTeam}" 
-				   process=":newTeamForm" update="tableForm:teamsTable"
-				   oncomplete="if (!args.validationFailed){PF('addTeamDialog').hide();increase();}"/>  
-    </p:dialog>
+		<p:commandButton value="Save" actionListener="#{teamsBean.addTeam}"
+			process=":newTeamForm" update="tableForm:teamsTable"
+			oncomplete="if (!args.validationFailed){PF('addTeamDialog').hide();increase();}" />
+	</p:dialog>
 </h:form>
-
 </html>
