@@ -3,104 +3,110 @@
         PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:jsf="http://xmlns.jcp.org/jsf"
-      xmlns:mini="http://xmlns.jcp.org/jsf/composite/components"
-      xmlns:p="http://primefaces.org/ui">
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	xmlns:mini="http://xmlns.jcp.org/jsf/composite/components"
+	xmlns:p="http://primefaces.org/ui">
 <h:head>
-    <title>JSF Training</title>
+	<title>JSF Training</title>
 </h:head>
 
 
-<h:form id="newTeamForm">    
+<h:form id="newTeamForm">
 	<p:messages id="messages" showDetail="true" closable="true">
-            <p:autoUpdate/>
-       </p:messages>
+		<p:autoUpdate />
+	</p:messages>
 	<h:panelGroup id="newTeamPanel">
-	<p:panelGrid  columns="2">    
+		<p:panelGrid columns="2">
 
 
-		<label jsf:for="codeIn"
-				jsf:value="#{label.code}" />
-				
-		<input jsf:id="codeIn" size="40" 
-				jsf:value="#{teamsBean.newTeam.code}" data-required="true" 
+			<label jsf:for="codeIn" jsf:value="#{label.code}" />
+
+			<input jsf:id="codeIn" size="40"
+				jsf:value="#{teamsBean.newTeam.code}" data-required="true"
 				type="text" placeholder="Introduzca un código" autofocus="autofocus" />
-				
-				
-		<p:outputLabel for="nameIn" value="#{label.name}"/>
-		<p:inputText id="nameIn" value="#{teamsBean.newTeam.name}" required="true" />
 
 
-		<h:outputText value="#{label.coach}"/>
-		<h:inputText id="coachIn" value="#{teamsBean.newTeam.coach}" required="true"/>
-					
-	</p:panelGrid>
-		
+			<p:outputLabel for="nameIn" value="#{label.name}" />
+			<p:inputText id="nameIn" value="#{teamsBean.newTeam.name}"
+				required="true" />
 
-</h:panelGroup>
-		
+
+			<h:outputText value="#{label.coach}" />
+			<h:inputText id="coachIn" value="#{teamsBean.newTeam.coach}"
+				required="true" />
+
+		</p:panelGrid>
+
+
+	</h:panelGroup>
+
 </h:form>
-<h:form id="tableForm">    
+<h:form id="tableForm">
 
 	<p:toolbar>
-            <p:toolbarGroup>
-            	<p:commandButton value="Add" actionListener="#{teamsBean.addTeam}" 
-				   process=":newTeamForm" update="tableForm:teamsTable @form"  ajax="false"/>           	
-           </p:toolbarGroup>
-           <p:toolbarGroup align="right">
-           	<p:commandButton value="Excel" styleClass="p-mr-2 p-mb-2">
-		     	<p:dataExporter type="xls" target="teamsTable" fileName="teams"/>
-		     </p:commandButton>
-		     <p:commandButton value="PDF" styleClass="p-mr-2 p-mb-2">
-			     	<p:dataExporter type="pdf" target="teamsTable" fileName="teams" />
-			     </p:commandButton>
-           </p:toolbarGroup>
-    </p:toolbar>       
-
-   	
-     
+		<p:toolbarGroup>
+			<p:commandButton value="Add" actionListener="#{teamsBean.addTeam}"
+				process=":newTeamForm" update="tableForm:teamsTable @form"
+				ajax="false" />
+		</p:toolbarGroup>
+		<p:toolbarGroup align="right">
+			<p:commandButton value="Excel" styleClass="ui-button-raised ui-button-success">
+				<p:dataExporter type="xls" target="teamsTable" fileName="teams" />
+			</p:commandButton>
+			<p:commandButton value="PDF" styleClass="ui-button-raised ui-button-warning">
+				<p:dataExporter type="pdf" target="teamsTable" fileName="teams" />
+			</p:commandButton>
+		</p:toolbarGroup>
+	</p:toolbar>
 
 
-     
-    <p:dataTable id="teamsTable" value="#{teamsBean.filteredList}" var="team"
-    	paginator="true" rows="3"
-    	rowsPerPageTemplate="5,10,{ShowAll|'All'}"
-    	draggableColumns="true"
-    	resizableColumns="true">
-    	<p:column>
-    		<f:facet name="header">Id</f:facet>
-    		<h:outputText value="#{team.id}"/>
-    	</p:column>
-    	<p:column>
-    		<f:facet name="header">Code</f:facet>
-    		<h:outputText value="#{team.code}"/>
-    	</p:column>
-    	<p:column headerText="#{label.name}" sortBy="#{team.name}" sortOrder="asc">
-    		<h:outputText value="#{team.name}"/>
-    	</p:column>
-    	
-    	<p:column exportable="false">
-    		<mini:shield iconLink="https://pbs.twimg.com/profile_images/1409740934217142273/-RmOAoJG.jpg"
-    			link="enlace"/>
-    	</p:column>
 
-    	<p:column headerText="#{label.coach}" filterBy="#{team.coach}" filterMatchMode="startsWith">
-    		<h:outputText value="#{team.coach}"/>
-    	</p:column>
-    	<p:column exportable="false">
-    		<p:commandButton value="View team" action="#{teamsBean.goToDetail(team.id)}" ajax="false"/>
-    	</p:column>
-    	
-    	<p:column exportable="false">
-    		<p:commandButton id="addButton" value="Delete" actionListener="#{teamsBean.deleteTeam(team.id)}" update="@form"
-    			process="@this"/>
-    	</p:column>
-    	
+	<p:dataTable id="teamsTable" value="#{teamsBean.filteredList}"
+		var="team" paginator="true" rows="3"
+		rowsPerPageTemplate="5,10,{ShowAll|'All'}" draggableColumns="true"
+		resizableColumns="true" paginatorPosition="bottom">
+		<p:column>
+			<f:facet name="header">Id</f:facet>
+			<h:outputText value="#{team.id}" />
+		</p:column>
+		<p:column>
+			<f:facet name="header">Code</f:facet>
+			<h:outputText value="#{team.code}" />
+		</p:column>
+		<p:column headerText="#{label.name}" sortBy="#{team.name}"
+			sortOrder="asc">
+			<h:outputText value="#{team.name}" />
+		</p:column>
 
-    </p:dataTable>
+		<p:column exportable="false">
+			<mini:shield
+				iconLink="https://pbs.twimg.com/profile_images/1409740934217142273/-RmOAoJG.jpg"
+				link="enlace" />
+		</p:column>
+
+		<p:column headerText="#{label.coach}" filterBy="#{team.coach}"
+			filterMatchMode="startsWith">
+			<h:outputText value="#{team.coach}" />
+		</p:column>
+		<p:column exportable="false">
+			<p:commandButton value="View team"
+				action="#{teamsBean.goToDetail(team.id)}" ajax="false" />
+			<br></br>
+			<p:commandButton id="addButton" value="Delete"
+				actionListener="#{teamsBean.deleteTeam(team.id)}" update="@form"
+				process="@this" />
+		</p:column>
+
+		<!--     	<p:column exportable="false"> -->
+		<!--     		<p:commandButton id="addButton" value="Delete" actionListener="#{teamsBean.deleteTeam(team.id)}" update="@form" -->
+		<!--     			process="@this"/> -->
+		<!--     	</p:column> -->
+
+
+	</p:dataTable>
 
 </h:form>
 
