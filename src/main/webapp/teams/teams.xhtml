@@ -12,7 +12,8 @@
 <h:head>
 	<title>JSF Training</title>
 	<!-- Carga de primeFlex -->
-	<link rel="stylesheet" href="https://unpkg.com/primeflex@3.1.0/primeflex.css" />
+	<link rel="stylesheet"
+		href="https://unpkg.com/primeflex@3.1.0/primeflex.css" />
 </h:head>
 
 
@@ -83,57 +84,35 @@
 	</p:dataTable>
 
 </h:form>
+
 <h:form id="newTeamForm">
-
-
-
-	<p:dialog id="addTeamDialog" header="Add team" widgetVar="addTeamDialog" modal="true">
+	<p:dialog id="addTeamDialog" header="Add team"
+		widgetVar="addTeamDialog" modal="true">
 
 		<div class="card">
 			<div class="field grid">
-				<label jsf:for="codeIn" jsf:value="#{label.code}" class="col-fixed" />
+				<p:outputLabel for="codeIn" value="#{label.code}"
+					class="md:col-6 lg:col-3" />
 
-				<input jsf:id="codeIn" size="40"
-					jsf:value="#{teamsBean.newTeam.code}" data-required="true"
-					type="text" placeholder="Introduzca un código"
-					autofocus="autofocus" class="inputfield" />			
+				<p:inputText id="codeIn" value="#{teamsBean.newTeam.code}"
+					data-required="true" type="text" placeholder="Introduzca un código"
+					autofocus="autofocus" class="inputfield col" />
 			</div>
-					
-				<div class="field grid">
-					<p:outputLabel for="nameIn" value="#{label.name}" class="col-fixed"/>
-					<p:inputText id="nameIn" value="#{teamsBean.newTeam.name}"
-						required="true" class="inputfield"/>
-				</div>
 
 			<div class="field grid">
-				<h:outputText value="#{label.coach}" class="col-fixed"/>
-				<h:inputText id="coachIn" value="#{teamsBean.newTeam.coach}"
-					required="true" class="inputfield"/>
+				<p:outputLabel for="nameIn" value="#{label.name}"
+					class="md:col-6 lg:col-3" />
+				<p:inputText id="nameIn" value="#{teamsBean.newTeam.name}"
+					required="true" class="inputfield col" />
+			</div>
+
+			<div class="field grid">
+				<p:outputLabel value="#{label.coach}" class="md:col-6 lg:col-3" />
+				<p:inputText id="coachIn" value="#{teamsBean.newTeam.coach}"
+					required="true" class="inputfield col" />
 			</div>
 		</div>
 
-<!-- 		<h:panelGroup id="newTeamPanel"> -->
-<!-- 			<p:panelGrid columns="2"> -->
-
-<!-- 				<label jsf:for="codeIn" jsf:value="#{label.code}" /> -->
-
-<!-- 				<input jsf:id="codeIn" size="40" -->
-<!-- 					jsf:value="#{teamsBean.newTeam.code}" data-required="true" -->
-<!-- 					type="text" placeholder="Introduzca un código" -->
-<!-- 					autofocus="autofocus" /> -->
-
-
-<!-- 				<p:outputLabel for="nameIn" value="#{label.name}" /> -->
-<!-- 				<p:inputText id="nameIn" value="#{teamsBean.newTeam.name}" -->
-<!-- 					required="true" /> -->
-
-
-<!-- 				<h:outputText value="#{label.coach}" /> -->
-<!-- 				<h:inputText id="coachIn" value="#{teamsBean.newTeam.coach}" -->
-<!-- 					required="true" /> -->
-
-<!-- 			</p:panelGrid> -->
-<!-- 		</h:panelGroup> -->
 		<p:commandButton value="Save" actionListener="#{teamsBean.addTeam}"
 			process=":newTeamForm" update="tableForm:teamsTable"
 			oncomplete="if (!args.validationFailed){PF('addTeamDialog').hide()}" />
