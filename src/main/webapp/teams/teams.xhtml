@@ -14,59 +14,29 @@
 </h:head>
 
 
-<h:form id="newTeamForm">    
+<h:form id="tableForm">    
 	<p:messages id="messages" showDetail="true" closable="true">
             <p:autoUpdate/>
        </p:messages>
-	<h:panelGroup id="newTeamPanel">
-	<p:panelGrid  columns="2">    
-
-
-		<label jsf:for="codeIn"
-				jsf:value="#{label.code}" />
-				
-		<input jsf:id="codeIn" size="40" 
-				jsf:value="#{teamsBean.newTeam.code}" data-required="true" 
-				type="text" placeholder="Introduzca un código" autofocus="autofocus" />
-				
-				
-		<p:outputLabel for="nameIn" value="#{label.name}"/>
-		<p:inputText id="nameIn" value="#{teamsBean.newTeam.name}" required="true" />
-
-
-		<h:outputText value="#{label.coach}"/>
-		<h:inputText id="coachIn" value="#{teamsBean.newTeam.coach}" required="true"/>
-					
-	</p:panelGrid>
-		
-
-</h:panelGroup>
-		
-</h:form>
-<h:form id="tableForm">    
-
 	<p:toolbar>
             <p:toolbarGroup>
-            	<p:commandButton value="Add" actionListener="#{teamsBean.addTeam}" 
-				   process=":newTeamForm" update="tableForm:teamsTable @form"  ajax="false"/>           	
+            	<p:commandButton value="Add" onclick="PF('addTeamDialog').show();"
+            		immediate="true" />           	
            </p:toolbarGroup>
            <p:toolbarGroup align="right">
-           	<p:commandButton value="Excel" styleClass="p-mr-2 p-mb-2">
+           	<p:commandButton value="Excel" styleClass="p-mr-2 p-mb-2 ui-button-secondary">
 		     	<p:dataExporter type="xls" target="teamsTable" fileName="teams"/>
 		     </p:commandButton>
-		     <p:commandButton value="PDF" styleClass="p-mr-2 p-mb-2">
+		     <p:commandButton value="PDF" styleClass="p-mr-2 p-mb-2 ui-button-info">
 			     	<p:dataExporter type="pdf" target="teamsTable" fileName="teams" />
 			     </p:commandButton>
            </p:toolbarGroup>
     </p:toolbar>       
 
-   	
      
-
-
-     
-    <p:dataTable id="teamsTable" value="#{teamsBean.filteredList}" var="team"
+    <p:dataTable id="teamsTable"  value="#{teamsBean.filteredList}" var="team"
     	paginator="true" rows="3"
+    	paginatorPosition="top"
     	rowsPerPageTemplate="5,10,{ShowAll|'All'}"
     	draggableColumns="true"
     	resizableColumns="true">
@@ -91,17 +61,47 @@
     		<h:outputText value="#{team.coach}"/>
     	</p:column>
     	<p:column exportable="false">
-    		<p:commandButton value="View team" action="#{teamsBean.goToDetail(team.id)}" ajax="false"/>
+	    	<p:toolbar>
+	    		<p:toolbarGroup>
+	    		<p:commandButton type="button" icon="pi pi-search"  action="#{teamsBean.goToDetail(team.id)}" ajax="false"
+	    			styleClass="ui-button-help p-mr-2" />
+	    		<p:commandButton type="button" id="addButton" actionListener="#{teamsBean.deleteTeam(team.id)}" update="@form"
+	    			process="@this" icon="pi pi-trash" styleClass="ui-button-help p-mr-2" />
+	    		</p:toolbarGroup>
+	    	</p:toolbar>	
     	</p:column>
+		
     	
-    	<p:column exportable="false">
-    		<p:commandButton id="addButton" value="Delete" actionListener="#{teamsBean.deleteTeam(team.id)}" update="@form"
-    			process="@this"/>
-    	</p:column>
-    	
+    </p:dataTable>    
 
-    </p:dataTable>
+</h:form>
+<h:form id="newTeamForm">
 
+    <p:dialog id="addTeamDialog" header="Add team" widgetVar="addTeamDialog" modal="true" >
+    	<h:panelGroup id="newTeamPanel">
+			<p:panelGrid  columns="2">    
+				
+				<label jsf:for="codeIn"
+						jsf:value="#{label.code}" />
+						
+				<input jsf:id="codeIn" size="40" 
+						jsf:value="#{teamsBean.newTeam.code}" data-required="true" 
+						type="text" placeholder="Introduzca un código" autofocus="autofocus" />
+						
+						
+				<p:outputLabel for="nameIn" value="#{label.name}"/>
+				<p:inputText id="nameIn" value="#{teamsBean.newTeam.name}" required="true" />
+		
+		
+				<h:outputText value="#{label.coach}"/>
+				<h:inputText id="coachIn" value="#{teamsBean.newTeam.coach}" required="true"/>
+							
+			</p:panelGrid>						
+		</h:panelGroup>
+		<p:commandButton value="Save" actionListener="#{teamsBean.addTeam}" 
+				   process=":newTeamForm" update="tableForm:teamsTable"
+				   oncomplete="if (!args.validationFailed){PF('addTeamDialog').hide()}"/>  
+    </p:dialog>
 </h:form>
 
 </html>
