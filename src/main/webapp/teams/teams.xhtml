@@ -21,7 +21,9 @@
 	    <div class="card">
 		    <div class="flex card-container indigo-container">
 				<p:commandButton value="Add" onclick="PF('addTeamDialog').show();"
-					immediate="true" styleClass="flex-1 m-3 ui-button-secondary"/>
+					styleClass="flex-1 m-3 ui-button-secondary"
+					actionListener="#{teamsBean.prepareToAddTeam}"
+					update=":newTeamForm:newTeamPanel"/>
 				<p:commandButton value="Excel" styleClass="flex-1 m-3 ui-button-secondary">
 					<p:dataExporter type="xls" target="teamsTable" fileName="teams" />
 				</p:commandButton>
@@ -84,6 +86,7 @@
 	<h:form id="newTeamForm" enctype="multipart/form-data">
 	
 	    <p:dialog id="addTeamDialog" header="Add team" widgetVar="addTeamDialog" modal="true" >
+			<h:panelGroup id="newTeamPanel">
 			<div class="card ">
 				<div class="field grid">
 					<label jsf:for="codeIn" jsf:value="#{label.code}" class="col-fixed"
@@ -118,6 +121,7 @@
 					</div>
 				</div>
 			</div>
+			</h:panelGroup>	
 	
 			<p:commandButton value="Save" actionListener="#{teamsBean.addTeam}" 
 					   process=":newTeamForm" update="tableForm:teamsTable"
