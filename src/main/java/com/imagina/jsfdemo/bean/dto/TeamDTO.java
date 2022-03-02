@@ -16,6 +16,20 @@ public class TeamDTO implements Serializable{
 	private byte[] icon;
 	
 
+	
+
+	public TeamDTO() {
+		super();
+	}
+
+	public TeamDTO(Integer id, String code, String name, String city, String coach) {
+		super();
+		this.id = id;
+		this.code = code;
+		this.name = name;
+		this.city = city;
+		this.coach = coach;
+	}
 
 	public String isBarcelona() {
 		return this.city.equals("BCN") ? "Yes":"no";
