@@ -15,20 +15,20 @@
 
 <h:body>
 	<!-- HEADER -->
-	<ui:include src="header.xhtml"></ui:include>
+	<ui:include src="header.xhtml" />
 	
+	<!-- MESSAGES -->
+	<h:form id="messagesForm"> 
+		<p:messages id="messages" showDetail="true" closable="true" >
+		      <p:autoUpdate/>
+		 </p:messages>
+	 </h:form>
 	<!-- DYNAMIC BODY -->
 	<ui:insert name="content" />
 	
 	<!-- FOOTER -->
+	<ui:include src="footer.xhtml" /> 
 	
-	<div class="card">
-    <div class="flex flex-row-reverse flex-wrap card-container yellow-container">
-        <div class="flex align-items-center justify-content-center w-4rem h-4rem bg-yellow-500 font-bold text-gray-900 border-round m-2">LFP</div>
-        <div class="flex align-items-center justify-content-center w-4rem h-4rem bg-yellow-500 font-bold text-gray-900 border-round m-2">Derechos de uso</div>
-        <div class="flex align-items-center justify-content-center w-4rem h-4rem bg-yellow-500 font-bold text-gray-900 border-round m-2">Contacto</div>
-    </div>
-</div>
 </h:body>
 
 </html>

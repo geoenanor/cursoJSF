@@ -14,10 +14,7 @@
 <ui:define name="content">
 		
 	<h:form id="tableForm">    
-		<p:messages id="messages" showDetail="true" closable="true">
-	            <p:autoUpdate/>
-	       </p:messages>
-	       
+			       
 	    <p:remoteCommand actionListener="#{teamsBean.increaseCode}" 
 	    	name="increase" update="teamsTable"/>   
 	    

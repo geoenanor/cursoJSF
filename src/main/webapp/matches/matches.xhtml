@@ -18,12 +18,10 @@
 
 <ui:define name="content">
 	<h:form id="tableForm">    
-		<p:messages id="messages" showDetail="true" closable="true">
-	            <p:autoUpdate/>
-	       </p:messages>
-	       
-	       <h1>Hola</h1>
-	       
+
+		<p:inputText value="#{teamsBean.nameSearch}" required="true" />
+	    
+	    <p:commandButton value="Submit" actionListener="#{teamsBean.addTeam}"/>
 	       
 	</h:form>
 </ui:define>
