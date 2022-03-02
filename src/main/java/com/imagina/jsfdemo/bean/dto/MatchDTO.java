@@ -10,10 +10,24 @@ public class MatchDTO implements Serializable{
 	
 	private Integer id;
 	private Date date;
-	private TeamDTO local;
-	private TeamDTO visitor;
+	private String local;
+	private String visitor;
 	private String result;
 	
+	
+	
+	public MatchDTO() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	public MatchDTO(Integer id, Date date, String local, String visitor, String result) {
+		super();
+		this.id = id;
+		this.date = date;
+		this.local = local;
+		this.visitor = visitor;
+		this.result = result;
+	}
 	public Integer getId() {
 		return id;
 	}
@@ -26,16 +40,16 @@ public class MatchDTO implements Serializable{
 	public void setDate(Date date) {
 		this.date = date;
 	}
-	public TeamDTO getLocal() {
+	public String getLocal() {
 		return local;
 	}
-	public void setLocal(TeamDTO local) {
+	public void setLocal(String local) {
 		this.local = local;
 	}
-	public TeamDTO getVisitor() {
+	public String getVisitor() {
 		return visitor;
 	}
-	public void setVisitor(TeamDTO visitor) {
+	public void setVisitor(String visitor) {
 		this.visitor = visitor;
 	}
 	public String getResult() {

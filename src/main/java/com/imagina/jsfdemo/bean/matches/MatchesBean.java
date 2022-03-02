@@ -1,6 +1,7 @@
 package com.imagina.jsfdemo.bean.matches;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
@@ -26,13 +27,21 @@ public class MatchesBean implements Serializable {
 	private static final long serialVersionUID = 9149473815682239832L;
 
 	private List<MatchDTO> matchesList;
+	
+	private MatchDTO newMatch;
+	
+	private LocalDate matchMaxDate;
 
 	
 	@PostConstruct
 	public void initBean() {
 		loadMatchesList();
+		defineMaxMatchDate();
 	}
 	
+	private void defineMaxMatchDate() {
+		matchMaxDate = LocalDate.now();
+	}
 
 	
 	private void loadMatchesList() {
@@ -41,13 +50,23 @@ public class MatchesBean implements Serializable {
 		MatchDTO match = new MatchDTO();
 		match.setId(matchesList.size()+1);
 		match.setResult("5-0");
-		match.setLocal(new TeamDTO(1, "FCB", "Futbol Club Barcelona", "Barcelona", "Xavi"));
-		match.setVisitor(new TeamDTO(2, "RM", "Real Madrid", "Madrid", "Acnelotti"));
+		match.setLocal("Barcelona");
+		match.setVisitor("Real Madrid");
 		match.setDate(new Date());
 		
 		matchesList.add(match);
 	}
 
+	
+	public void prepareToAddMatch() {
+		newMatch = new MatchDTO();
+		newMatch.setId(matchesList.size()+1);
+	}
+	
+	public void addMatch() {
+		matchesList.add(newMatch);
+		newMatch = new MatchDTO();
+	}
 
 
 	public List<MatchDTO> getMatchesList() {
@@ -58,6 +77,24 @@ public class MatchesBean implements Serializable {
 
 	public void setMatchesList(List<MatchDTO> matchesList) {
 		this.matchesList = matchesList;
+	}
+
+
+
+
+	public MatchDTO getNewMatch() {
+		return newMatch;
+	}
+
+
+
+
+	public void setNewMatch(MatchDTO newMatch) {
+		this.newMatch = newMatch;
+	}
+
+	public LocalDate getMatchMaxDate() {
+		return matchMaxDate;
 	}
 
 	

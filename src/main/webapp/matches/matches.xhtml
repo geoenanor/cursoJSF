@@ -17,9 +17,20 @@
 
 
 	<ui:define name="content">
+		<h:form id="topPanelForm">
+			<div class="card">
+			    <div class="flex card-container indigo-container">
+					<p:commandButton value="Add" oncomplete="PF('addMatchDialog').show();"
+						styleClass="flex-1 m-3 ui-button-secondary"
+						actionListener="#{matchesBean.prepareToAddMatch}"
+						update=":newMatchForm:newMatchPanel"/>
+					
+				</div>
+			</div>
+		</h:form>
 		<h:form id="tableForm">
 
-			<p:dataTable id="tmatchesTable" value="#{matchesBean.matchesList}"
+			<p:dataTable id="matchesTable" value="#{matchesBean.matchesList}"
 				var="m" paginator="true" rows="3" paginatorPosition="top"
 				rowsPerPageTemplate="5,10,{ShowAll|'All'}" draggableColumns="true"
 				resizableColumns="true">
@@ -28,10 +39,10 @@
 					<h:outputText value="#{m.id}" />
 				</p:column>
 				<p:column headerText="Local">
-					<h:outputText value="#{m.local.name}" />
+					<h:outputText value="#{m.local}" />
 				</p:column>
 				<p:column headerText="Visitor">
-					<h:outputText value="#{m.visitor.name}" />
+					<h:outputText value="#{m.visitor}" />
 				</p:column>
 				<p:column headerText="Date">
 					<h:outputText value="#{m.date}" >
@@ -45,6 +56,31 @@
 
 			</p:dataTable>
 
+		</h:form>
+	</ui:define>
+	
+	<ui:define name="dialogs">
+		<h:form id="newMatchForm" enctype="multipart/form-data">
+		
+		    <p:dialog id="addMatchDialog" header="Add match" widgetVar="addMatchDialog" modal="true" >
+				
+				<h:panelGrid columns="2" id="newMatchPanel">
+					<p:outputLabel value="Local" for="localIn"/>
+					<p:inputText id="localIn" value="#{matchesBean.newMatch.local}"/>
+					<p:outputLabel value="Visitor" for="visitorIn"/>
+					<p:inputText id="visitorIn" value="#{matchesBean.newMatch.visitor}"/>
+					<p:outputLabel value="Date" for="dateIn"/>
+					<p:calendar id="dateIn" value="#{matchesBean.newMatch.date}" 
+						maxdate="#{matchesBean.matchMaxDate}" />
+
+					<p:outputLabel value="Result" for="resultIn"/>
+					<p:inputText id="resultIn" value="#{matchesBean.newMatch.result}"/>					
+				</h:panelGrid>
+		
+				<p:commandButton value="Save" actionListener="#{matchesBean.addMatch}" 
+						   process="@form" update=":tableForm:matchesTable"
+						   oncomplete="if (!args.validationFailed){PF('addMatchDialog').hide();}"/>  
+		    </p:dialog>
 		</h:form>
 	</ui:define>
 </ui:composition>
