@@ -6,21 +6,13 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:jsf="http://xmlns.jcp.org/jsf"
       xmlns:p="http://primefaces.org/ui">
-<h:head>
-    <title>Template</title>
-    <link rel="stylesheet" href="https://unpkg.com/primeflex@3.1.0/primeflex.css" />
-</h:head>
 
-<h:body>
 	<h:form id="menuForm">
 		<p:menubar>
 			<p:menuitem value="Team List" outcome="/teams/teams" />
 			<p:menuitem value="Match List" outcome="/matches/matches" />
 		</p:menubar>
 	</h:form>
-	<ui:insert name="content" />
-</h:body>
 
 </html>
