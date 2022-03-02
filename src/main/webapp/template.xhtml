@@ -14,7 +14,12 @@
 </h:head>
 
 <h:body>
-	<h:outputText value="Ánimos que JSF es fácil"/>
+	<h:form id="menuForm">
+		<p:menubar>
+			<p:menuitem value="Team List" outcome="/teams/teams" />
+			<p:menuitem value="Match List" outcome="/matches/matches" />
+		</p:menubar>
+	</h:form>
 	<ui:insert name="content" />
 </h:body>
 
