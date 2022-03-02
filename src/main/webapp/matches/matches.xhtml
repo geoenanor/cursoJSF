@@ -18,6 +18,7 @@
 
 	<ui:define name="content">
 		<h:form id="topPanelForm">
+			
 			<div class="card">
 			    <div class="flex card-container indigo-container">
 					<p:commandButton value="Add" oncomplete="PF('addMatchDialog').show();"
@@ -33,7 +34,14 @@
 			<p:dataTable id="matchesTable" value="#{matchesBean.matchesList}"
 				var="m" paginator="true" rows="3" paginatorPosition="top"
 				rowsPerPageTemplate="5,10,{ShowAll|'All'}" draggableColumns="true"
-				resizableColumns="true">
+				resizableColumns="true"
+				selectionMode="single"
+				rowKey="#{m.id}">
+				
+				<p:ajax event="rowSelect" listener="#{matchesBean.onMatchSelect}" 
+					oncomplete="PF('viewMatchDialog').show()"
+					update=":matchDetailForm"/>
+				
 				<p:column>
 					<f:facet name="header">Id</f:facet>
 					<h:outputText value="#{m.id}" />
@@ -82,5 +90,25 @@
 						   oncomplete="if (!args.validationFailed){PF('addMatchDialog').hide();}"/>  
 		    </p:dialog>
 		</h:form>
+		
+		
+		    <p:dialog id="viewMatchDialog" header="Add match" widgetVar="viewMatchDialog" modal="true" >
+				<h:form id="matchDetailForm">
+					
+				<h:panelGrid columns="2" id="newMatchPanel">
+					<p:outputLabel value="Local" for="localOut"/>
+					<h:outputText id="localOut" value="#{matchesBean.matchDetail.local}"/>
+					<p:outputLabel value="Visitor" for="visitorOut"/>
+					<h:outputText id="visitorOut" value="#{matchesBean.matchDetail.visitor}"/>
+					<p:outputLabel value="Date" for="dateOut"/>
+					<h:outputText id="dateOut" value="#{matchesBean.matchDetail.date}">
+						<f:convertDateTime pattern="dd-MM-yyyy"/>
+					</h:outputText>
+					<p:outputLabel value="Result" for="resultOut"/>
+					<h:outputText id="resultOut" value="#{matchesBean.matchDetail.result}"/>				
+				</h:panelGrid>
+
+				</h:form>		   
+		    </p:dialog>
 	</ui:define>
 </ui:composition>

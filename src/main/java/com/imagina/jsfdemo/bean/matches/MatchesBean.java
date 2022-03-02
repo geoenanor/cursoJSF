@@ -13,6 +13,7 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Named;
 
 import org.primefaces.component.fileupload.FileUpload;
+import org.primefaces.event.SelectEvent;
 import org.primefaces.model.file.UploadedFile;
 
 import com.imagina.jsfdemo.bean.dto.MatchDTO;
@@ -31,6 +32,8 @@ public class MatchesBean implements Serializable {
 	private MatchDTO newMatch;
 	
 	private LocalDate matchMaxDate;
+	
+	private MatchDTO matchDetail;
 
 	
 	@PostConstruct
@@ -67,6 +70,10 @@ public class MatchesBean implements Serializable {
 		matchesList.add(newMatch);
 		newMatch = new MatchDTO();
 	}
+	
+	public void onMatchSelect(SelectEvent<MatchDTO> event) {
+		matchDetail = event.getObject();
+    }
 
 
 	public List<MatchDTO> getMatchesList() {
@@ -88,6 +95,14 @@ public class MatchesBean implements Serializable {
 
 
 
+
+	public MatchDTO getMatchDetail() {
+		return matchDetail;
+	}
+
+	public void setMatchDetail(MatchDTO matchDetail) {
+		this.matchDetail = matchDetail;
+	}
 
 	public void setNewMatch(MatchDTO newMatch) {
 		this.newMatch = newMatch;
