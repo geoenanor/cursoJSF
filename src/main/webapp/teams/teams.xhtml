@@ -87,9 +87,9 @@
     	<p:column exportable="false">
 	    	<p:toolbar>
 	    		<p:toolbarGroup>
-	    		<p:commandButton type="button" icon="pi pi-search"  action="#{teamsBean.goToDetail(team.id)}" ajax="false"
+	    		<p:commandButton icon="pi pi-search"  action="#{teamsBean.goToDetail(team.id)}" ajax="false"
 	    			styleClass="ui-button-help p-mr-2" />
-	    		<p:commandButton type="button" id="addButton" actionListener="#{teamsBean.deleteTeam(team.id)}" update="@form"
+	    		<p:commandButton id="addButton" actionListener="#{teamsBean.deleteTeam(team.id)}" update="@form"
 	    			process="@this" icon="pi pi-trash" styleClass="ui-button-help p-mr-2" />
 	    		</p:toolbarGroup>
 	    	</p:toolbar>	
